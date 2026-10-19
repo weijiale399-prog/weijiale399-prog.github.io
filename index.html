@@ -230,6 +230,7 @@
     <button class="nav-btn" data-view="grammar"><span class="ico">✳</span>核心语法库</button>
     <button class="nav-btn" data-view="prepositions"><span class="ico">↗</span>常用介词</button>
     <button class="nav-btn" data-view="pronouns"><span class="ico">A↔</span>常用代词</button>
+    <button class="nav-btn" data-view="whwords"><span class="ico">?</span>特殊疑问词</button>
     <button class="nav-btn" data-view="numbers"><span class="ico">123</span>数字与生活常识</button>
     <button class="nav-btn" data-view="reading"><span class="ico">▧</span>短阅读精读</button>
     <button class="nav-btn" data-view="practice"><span class="ico">✓</span>语法小测</button>
@@ -330,6 +331,17 @@
     <div class="filter-row" id="numberTabs"></div>
     <div class="panel" style="margin-bottom:16px"><div class="search" style="min-width:0;max-width:100%;margin-bottom:10px"><input id="numberSearch" type="search" placeholder="搜索：100 million、月份、毫米、摄氏度、quarter past…" aria-label="搜索数字与生活常识" /></div><div id="numberCount" class="panel-desc"></div></div>
     <div id="numberContent" class="number-grid"></div>
+  </section>
+    <section id="view-whwords" class="view">
+    <div class="page-intro"><h2>特殊疑问词 · 大白话讲解</h2><p>先想清楚“我到底想问什么”，再选疑问词。每个词都配有简单解释、使用结构、例句和容易弄混的地方。</p></div>
+    <div class="reference-callout"><b>先记住：</b>问“什么”用 What；问“谁”用 Who；问“谁的”用 Whose；问“哪个”用 Which；问时间用 When；问地点用 Where；问原因用 Why；问方式或情况用 How。大多数特殊疑问句可以理解为：<b>疑问词 + 一般疑问句语序</b>。但疑问词本身作主语时，通常不倒装，例如 Who called you?</div>
+    <div class="reference-toolbar"><input id="whSearch" class="reference-search" type="search" placeholder="搜索疑问词或中文意思，如 why、多久、多少钱…"/><span id="whCount" class="reference-count">常见疑问词与用法</span></div>
+    <div class="reference-chip-row" id="whFilters"><button class="reference-chip active" data-whcat="全部">全部</button><button class="reference-chip" data-whcat="基础疑问词">基础疑问词</button><button class="reference-chip" data-whcat="How 组合">How 组合</button><button class="reference-chip" data-whcat="句型与语序">句型与语序</button></div>
+    <div id="whContent" class="reference-grid"></div>
+    <h3 class="reference-section-title">最容易混淆的几组</h3>
+    <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>疑问词</th><th>大白话理解</th><th>例句</th><th>记忆点</th></tr></thead><tbody>
+    <tr><td><b class="reference-word-text">What</b></td><td>问是什么、做什么</td><td>What is this? 这是什么？</td><td>答案通常是事物、信息或活动</td></tr><tr><td><b class="reference-word-text">Which</b></td><td>问有限选项里的哪一个</td><td>Which one do you want? 你要哪一个？</td><td>常有可选范围</td></tr><tr><td><b class="reference-word-text">Who / Whose</b></td><td>谁 / 谁的</td><td>Who is he? 他是谁？<br>Whose bag is this? 这是谁的包？</td><td>whose 后面常接名词，也可单独使用</td></tr><tr><td><b class="reference-word-text">How many / How much</b></td><td>多少个 / 多少（不可数）或多少钱</td><td>How many books...?<br>How much water...?</td><td>many + 可数名词复数；much + 不可数名词</td></tr><tr><td><b class="reference-word-text">How long / How often</b></td><td>多久 / 多经常</td><td>How long is the film? 电影多长？<br>How often do you read? 你多久读一次？</td><td>long 问时长或长度；often 问频率</td></tr></tbody></table></div>
+    <div class="reference-callout"><b>开口小窍门：</b>先用中文确定问题类型，再套最简单的句型：Where are you? / What do you like? / When do you study? / Why are you happy? 每天选 2 个问题，大声读三遍，再把答案换成自己的真实情况。</div>
   </section>
   <section id="view-reading" class="view">
     <div class="page-intro"><h2>短阅读精读室</h2><p>下面是为初学者写的原创短文，不是教材原文。先读英文，点击蓝色重点词查看音标和中文，再展开译文，最后试着不看中文复述。</p></div>
@@ -534,7 +546,40 @@ function renderNumbers(category=activeNumberCategory,query=($('#numberSearch')?.
  $$('#numberContent [data-numword]').forEach(b=>b.onclick=()=>openDict(b.dataset.numword,b.dataset.numipa,'数字与生活常识',b.dataset.nummeaning,b.dataset.numexample));
 }
 
-function showView(view){activeView=view;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('.nav-btn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));const names={home:'学习首页',lessons:'第 1–50 课',grammar:'核心语法库',prepositions:'常用介词',pronouns:'常用代词',numbers:'数字与生活常识',reading:'短阅读精读',practice:'语法小测',guide:'如何使用本站'};$('#crumb').textContent='学习中心　/　'+(names[view]||view);window.scrollTo({top:0,behavior:'smooth'});if(view==='lessons')renderLessons();if(view==='grammar')renderGrammar();if(view==='prepositions')renderPrepositions();if(view==='pronouns')renderPronouns();if(view==='numbers')renderNumbers();if(view==='reading')renderReadings();if(view==='practice')renderQuiz(activeQuizCategory);}
+
+const whWordData=[
+{word:'What',cat:'基础疑问词',meaning:'什么；什么事情；也可以问职业或做什么。',use:'What + be/助动词/情态动词 + 主语...? 具体结构按句子变化。',examples:[['What is this?','这是什么？'],['What do you do?','你做什么工作？'],['What are you doing?','你正在做什么？']],tip:'问“是什么、做什么”。What colour...? 问什么颜色；What time...? 问几点。'},
+{word:'Who',cat:'基础疑问词',meaning:'谁。问一个人是谁，或者谁做了某个动作。',use:'Who + be 动词...? / Who + 动词...? 当 who 是动作执行者时，后面通常直接接动词。',examples:[['Who is that man?','那个男人是谁？'],['Who called you?','谁给你打电话了？']],tip:'Who called you? 普通问句里通常不需要加 did。'},
+{word:'Whom',cat:'基础疑问词',meaning:'谁（作宾语）。比较正式，日常口语常用 who 代替。',use:'Whom + 助动词 + 主语...? 或放在介词后。',examples:[['Whom did you see?','你看见了谁？'],['To whom did you speak?','你跟谁说话了？']],tip:'初学阶段先认识即可。口语里常说 Who did you see?'},
+{word:'Whose',cat:'基础疑问词',meaning:'谁的。问物品属于谁。',use:'Whose + 名词 + be...?；也可以单独说 Whose is this?',examples:[['Whose bag is this?','这是谁的包？'],['Whose are these keys?','这些钥匙是谁的？']],tip:'Who = 谁；whose = 谁的。Whose 后面可以直接跟名词。'},
+{word:'Which',cat:'基础疑问词',meaning:'哪一个、哪一些。通常是在有限选项中做选择。',use:'Which + 名词...? / Which one...? / Which do you prefer?',examples:[['Which colour do you like?','你喜欢哪种颜色？'],['Which one is yours?','哪一个是你的？']],tip:'What 偏向问内容；which 常表示“这些里面选哪个”。'},
+{word:'When',cat:'基础疑问词',meaning:'什么时候。问时间或事情发生的时间。',use:'When + 一般疑问句语序...? 常见 When do/does...?、When is...?',examples:[['When is your birthday?','你的生日是什么时候？'],['When do you get up?','你什么时候起床？']],tip:'What time 问具体几点；when 问时间范围更广。'},
+{word:'Where',cat:'基础疑问词',meaning:'哪里、在哪里、去哪里。问地点或方向。',use:'Where + be/助动词 + 主语...? / Where do/does + 主语 + 动词原形...?',examples:[['Where are my keys?','我的钥匙在哪里？'],['Where do you live?','你住在哪里？'],['Where is she going?','她要去哪里？']],tip:'Where are you from? 是问你来自哪里。'},
+{word:'Why',cat:'基础疑问词',meaning:'为什么。问原因。',use:'Why + 一般疑问句语序...? 回答原因时常用 Because...',examples:[['Why are you late?','你为什么迟到？'],['Why do you like English?','你为什么喜欢英语？'],['Because it is useful.','因为它很有用。']],tip:'提问用 Why，回答原因常用 Because。'},
+{word:'How',cat:'基础疑问词',meaning:'怎样、如何；也可以问状态或程度。',use:'How + be/助动词...? 常见 How are you? / How do you...?',examples:[['How are you?','你怎么样？'],['How do you go to work?','你怎么去上班？'],['How does it work?','它是怎么运作的？']],tip:'How 不只表示“如何”，也会和形容词、副词组成固定问法。'},
+{word:'How old',cat:'How 组合',meaning:'多大；问年龄。',use:'How old + be + 主语?',examples:[['How old are you?','你多大了？'],['How old is your brother?','你哥哥/弟弟多大了？']],tip:'回答可说 I am 20 years old，也可以简洁地说 I’m 20。'},
+{word:'How many',cat:'How 组合',meaning:'多少个。问可数名词的数量。',use:'How many + 可数名词复数 + 一般疑问句?',examples:[['How many books do you have?','你有多少本书？'],['How many people are there?','那里有多少人？']],tip:'名词通常用复数：How many apples...?'},
+{word:'How much',cat:'How 组合',meaning:'多少。问不可数名词的量；也可以问价格。',use:'How much + 不可数名词...? / How much is it?',examples:[['How much water do you drink?','你喝多少水？'],['How much is this bag?','这个包多少钱？']],tip:'many 配可数名词复数；much 配不可数名词。问价格也用 How much。'},
+{word:'How often',cat:'How 组合',meaning:'多久一次、多经常。问频率。',use:'How often + do/does + 主语 + 动词原形...?',examples:[['How often do you read English?','你多久读一次英语？'],['How often does he exercise?','他多久锻炼一次？']],tip:'答案常见 every day、once a week、twice a month、often、sometimes。'},
+{word:'How long',cat:'How 组合',meaning:'多长；多久。问长度或持续时间。',use:'How long + be...? / How long does/did + 事情 + last/take...?',examples:[['How long is the table?','桌子有多长？'],['How long does the lesson last?','这节课持续多久？']],tip:'问做某事花多久，也常用 How long does it take...?'},
+{word:'How far',cat:'How 组合',meaning:'多远。问距离。',use:'How far is it from A to B?',examples:[['How far is the station?','车站有多远？'],['How far is it from here to school?','从这里到学校有多远？']],tip:'far 问距离；long 问长度或持续时间。'},
+{word:'How tall',cat:'How 组合',meaning:'多高。常用于人的身高，也可问较高的物体。',use:'How tall + be + 人/物?',examples:[['How tall are you?','你多高？'],['How tall is that building?','那栋楼有多高？']],tip:'问人的身高常用 how tall；问高度也可用 how high。'},
+{word:'How high',cat:'How 组合',meaning:'有多高；强调物体高度或离地面的高度。',use:'How high + be/can + 主语...?',examples:[['How high is the wall?','这堵墙有多高？'],['How high can the plane fly?','飞机能飞多高？']],tip:'how high 常问高度、海拔或离地距离。'},
+{word:'How fast',cat:'How 组合',meaning:'多快。问速度。',use:'How fast + be/can/do...?',examples:[['How fast can you run?','你能跑多快？'],['How fast is the train?','火车有多快？']],tip:'答案可以是 very fast，也可以用每小时多少公里等单位。'}
+];
+let activeWhCategory='全部';
+function renderWhWords(){
+ const q=String($('#whSearch')?.value||'').trim().toLowerCase();
+ const items=whWordData.filter(x=>(activeWhCategory==='全部'||x.cat===activeWhCategory)&&[x.word,x.cat,x.meaning,x.use,x.tip,...x.examples.flat()].join(' ').toLowerCase().includes(q));
+ const count=$('#whCount');if(count)count.textContent='显示 '+items.length+' 个疑问词 / 组合；点击“记住它”查看整理好的释义。';
+ const out=$('#whContent');if(!out)return;
+ out.innerHTML=items.map(x=>'<article class="reference-card"><div class="reference-card-head"><div><div class="reference-tag">'+escapeHtml(x.cat)+'</div><h3>'+escapeHtml(x.word)+'</h3></div><button class="reference-word" data-wh-speak="'+escapeHtml(x.word)+'" title="点击查看用法提示">记住它</button></div><div class="reference-meaning">'+escapeHtml(x.meaning)+'</div><div class="reference-note"><b>怎么用：</b>'+escapeHtml(x.use)+'</div>'+x.examples.map(e=>'<div class="reference-example"><b>'+escapeHtml(e[0])+'</b><br><span style="color:var(--muted)">'+escapeHtml(e[1])+'</span></div>').join('')+'<div class="reference-note"><b>大白话记忆：</b>'+escapeHtml(x.tip)+'</div></article>').join('')||'<div class="empty">没有找到相关疑问词，试试 what、地点、多久或多少钱。</div>';
+ $('#whContent [data-wh-speak]').forEach(b=>b.onclick=()=>{const x=whWordData.find(y=>y.word===b.dataset.whSpeak);if(x)openDict(x.word,'','特殊疑问词',x.meaning,x.use+'\n'+x.examples.map(e=>e[0]+' — '+e[1]).join('\n')+'\n记忆：'+x.tip);});
+}
+$('#whSearch')?.addEventListener('input',renderWhWords);
+$('#whFilters')?.addEventListener('click',e=>{const b=e.target.closest('[data-whcat]');if(!b)return;activeWhCategory=b.dataset.whcat;$('#whFilters [data-whcat]').forEach(x=>x.classList.toggle('active',x===b));renderWhWords();});
+
+function showView(view){activeView=view;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('.nav-btn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));const names={home:'学习首页',lessons:'第 1–50 课',grammar:'核心语法库',prepositions:'常用介词',pronouns:'常用代词',whwords:'特殊疑问词',numbers:'数字与生活常识',reading:'短阅读精读',practice:'语法小测',guide:'如何使用本站'};$('#crumb').textContent='学习中心　/　'+(names[view]||view);window.scrollTo({top:0,behavior:'smooth'});if(view==='lessons')renderLessons();if(view==='grammar')renderGrammar();if(view==='prepositions')renderPrepositions();if(view==='pronouns')renderPronouns();if(view==='whwords')renderWhWords();if(view==='numbers')renderNumbers();if(view==='reading')renderReadings();if(view==='practice')renderQuiz(activeQuizCategory);}
 function renderStages(){const el=$('#stageGrid');el.innerHTML=stages.map((s,i)=>`<button class="stage-card" data-openstage="${i}"><div class="stage-num">STAGE 0${i+1} · LESSON ${s.range}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="stage-foot"><b>0/10 已完成</b><span class="mini-bar"><span></span></span></div><div style="font-size:10px;color:#8290a4;margin-top:10px">${s.focus}</div></button>`).join('');$$('[data-openstage]').forEach(b=>b.onclick=()=>{showView('lessons');setStage(b.dataset.openstage)});updateProgress();}
 function setStage(stage){activeStage=String(stage);if(activeStage!=='all'){const first=lessons.find(l=>String(l.stage)===activeStage);if(first&&!lessons.some(l=>String(l.stage)===activeStage&&l.n===activeLesson))activeLesson=first.n;}$$('#stageFilters .filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.stage===activeStage));renderLessons();}
 function renderLessonList(search=''){const list=$('#lessonList');const filtered=lessons.filter(l=>(activeStage==='all'||String(l.stage)===activeStage)&&(`${l.n} ${l.title} ${l.cn} ${l.topic} ${l.tags.join(' ')} ${l.points.join(' ')}`).toLowerCase().includes(search.toLowerCase()));list.innerHTML='<h3>课程目录 · '+filtered.length+' 课</h3>'+filtered.map(l=>`<button class="lesson-pick ${l.n===activeLesson?'active':''}" data-lesson="${l.n}"><span class="num">${String(l.n).padStart(2,'0')}</span><span class="pick-name"><span>Lesson ${l.n} · ${escapeHtml(l.title)}</span><small>${escapeHtml(l.cn)}</small></span>${completed.has(l.n)?'<span class="done-mark">✓</span>':''}</button>`).join('')||'<div class="empty">没有找到课程，请换一个关键词。</div>';$$('[data-lesson]').forEach(b=>b.onclick=()=>selectLesson(Number(b.dataset.lesson)));}
@@ -865,7 +910,7 @@ $('#prepSearch').addEventListener('input',e=>renderPrepositions(activePrepFilter
 $('#pronounFilters').addEventListener('click',e=>{const b=e.target.closest('[data-pronounfilter]');if(b)renderPronouns(b.dataset.pronounfilter,$('#pronounSearch').value)});
 $('#pronounSearch').addEventListener('input',e=>renderPronouns(activePronounFilter,e.target.value));
 $('#numberSearch').addEventListener('input',e=>renderNumbers(activeNumberCategory,e.target.value));
-renderStages();renderLessons();renderGrammar();renderPrepositions();renderPronouns();renderNumbers();renderReadings();renderQuiz();updateProgress();
+renderStages();renderLessons();renderGrammar();renderPrepositions();renderPronouns();renderWhWords();renderNumbers();renderReadings();renderQuiz();updateProgress();
 
 // Mobile-specific navigation and search controls.
 const mobileMenuToggle=$('#mobileMenuToggle');
