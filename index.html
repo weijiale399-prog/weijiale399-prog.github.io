@@ -228,7 +228,7 @@
     <button class="nav-btn active" data-view="home"><span class="ico">⌂</span>学习首页</button>
     <button class="nav-btn" data-view="lessons"><span class="ico">▤</span>第 1–50 课</button>
     <button class="nav-btn" data-view="grammar"><span class="ico">✳</span>核心语法库</button>
-    <a class="nav-btn" href="grammar-practice.html" style="display:flex;align-items:center;gap:10px;text-decoration:none"><span class="ico">✎</span>关键语法与句型转换</a>
+    <button class="nav-btn" data-view="grammar-practice"><span class="ico">✎</span>关键语法与句型转换</button>
     <button class="nav-btn" data-view="prepositions"><span class="ico">↗</span>常用介词</button>
     <button class="nav-btn" data-view="pronouns"><span class="ico">A↔</span>常用代词</button>
     <button class="nav-btn" data-view="whwords"><span class="ico">?</span>特殊疑问词</button>
@@ -259,6 +259,10 @@
     <div class="page-intro"><h2>核心语法库</h2><p>把 1—50 课中的重点串成系统。点击卡片可以复习公式、示例和最容易犯的错误。</p></div>
     <div class="filter-row"><button class="filter-chip active" data-gramfilter="all">全部语法</button><button class="filter-chip" data-gramfilter="句型">句型与问句</button><button class="filter-chip" data-gramfilter="词法">词法与代词</button><button class="filter-chip" data-gramfilter="时间">时态与动作</button></div>
     <div class="grammar-grid" id="grammarGrid"></div>
+  </section>
+  <section id="view-grammar-practice" class="view">
+    <div class="page-intro"><h2>关键语法与句型转换</h2><p>在原网站的学习界面中查看专题讲解；左侧菜单会一直保留。</p></div>
+    <iframe title="关键语法与句型转换" src="grammar-practice.html" style="display:block;width:100%;height:calc(100vh - 145px);min-height:720px;border:1px solid var(--line);border-radius:16px;background:#f6f7fb" loading="lazy"></iframe>
   </section>
   <section id="view-prepositions" class="view">
     <div class="page-intro"><h2>常用介词目录</h2><p>按地点、时间、方向和其他关系分类整理。每个介词都附有常见用法、英文例句、中文翻译和容易混淆的地方，适合随时查阅。</p></div>
@@ -667,7 +671,7 @@ function renderWowEnglish(){
  $('#wowNext')?.addEventListener('click',()=>{if(activeWowUnit<wowUnits.length-1){activeWowUnit++;renderWowEnglish();}});
 }
 
-function showView(view){activeView=view;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('.nav-btn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));const names={home:'学习首页',lessons:'第 1–50 课',grammar:'核心语法库',prepositions:'常用介词',pronouns:'常用代词',whwords:'特殊疑问词',numbers:'数字与生活常识',reading:'短阅读精读',practice:'语法小测',guide:'如何使用本站'};$('#crumb').textContent='学习中心　/　'+(names[view]||view);window.scrollTo({top:0,behavior:'smooth'});if(view==='lessons')renderLessons();if(view==='grammar')renderGrammar();if(view==='prepositions')renderPrepositions();if(view==='pronouns')renderPronouns();if(view==='whwords')renderWhWords();if(view==='numbers')renderNumbers();if(view==='reading')renderReadings();if(view==='practice')renderQuiz(activeQuizCategory);if(view==='wowenglish')renderWowEnglish();}
+function showView(view){activeView=view;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('.nav-btn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));const names={home:'学习首页',lessons:'第 1–50 课',grammar:'核心语法库',prepositions:'常用介词',pronouns:'常用代词',whwords:'特殊疑问词',numbers:'数字与生活常识',reading:'短阅读精读',practice:'语法小测',guide:'如何使用本站','grammar-practice':'关键语法与句型转换'};$('#crumb').textContent='学习中心　/　'+(names[view]||view);window.scrollTo({top:0,behavior:'smooth'});if(view==='lessons')renderLessons();if(view==='grammar')renderGrammar();if(view==='prepositions')renderPrepositions();if(view==='pronouns')renderPronouns();if(view==='whwords')renderWhWords();if(view==='numbers')renderNumbers();if(view==='reading')renderReadings();if(view==='practice')renderQuiz(activeQuizCategory);if(view==='wowenglish')renderWowEnglish();}
 function renderStages(){const el=$('#stageGrid');el.innerHTML=stages.map((s,i)=>`<button class="stage-card" data-openstage="${i}"><div class="stage-num">STAGE 0${i+1} · LESSON ${s.range}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="stage-foot"><b>0/10 已完成</b><span class="mini-bar"><span></span></span></div><div style="font-size:10px;color:#8290a4;margin-top:10px">${s.focus}</div></button>`).join('');$$('[data-openstage]').forEach(b=>b.onclick=()=>{showView('lessons');setStage(b.dataset.openstage)});updateProgress();}
 function setStage(stage){activeStage=String(stage);if(activeStage!=='all'){const first=lessons.find(l=>String(l.stage)===activeStage);if(first&&!lessons.some(l=>String(l.stage)===activeStage&&l.n===activeLesson))activeLesson=first.n;}$$('#stageFilters .filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.stage===activeStage));renderLessons();}
 function renderLessonList(search=''){const list=$('#lessonList');const filtered=lessons.filter(l=>(activeStage==='all'||String(l.stage)===activeStage)&&(`${l.n} ${l.title} ${l.cn} ${l.topic} ${l.tags.join(' ')} ${l.points.join(' ')}`).toLowerCase().includes(search.toLowerCase()));list.innerHTML='<h3>课程目录 · '+filtered.length+' 课</h3>'+filtered.map(l=>`<button class="lesson-pick ${l.n===activeLesson?'active':''}" data-lesson="${l.n}"><span class="num">${String(l.n).padStart(2,'0')}</span><span class="pick-name"><span>Lesson ${l.n} · ${escapeHtml(l.title)}</span><small>${escapeHtml(l.cn)}</small></span>${completed.has(l.n)?'<span class="done-mark">✓</span>':''}</button>`).join('')||'<div class="empty">没有找到课程，请换一个关键词。</div>';$$('[data-lesson]').forEach(b=>b.onclick=()=>selectLesson(Number(b.dataset.lesson)));}
