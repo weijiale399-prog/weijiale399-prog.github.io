@@ -498,7 +498,7 @@ function renderPhrases(filter=activePhraseFilter, query=($('#phraseSearch')?.val
  const list=phraseData.filter(p=>(filter==='全部'||p.category===filter)&&([p.phrase,p.category,p.meaning,p.example,p.translation].join(' ')).toLowerCase().includes(q));
  const total=$('#phraseCountTotal');if(total)total.textContent=phraseData.length;
  const count=$('#phraseCount');if(count)count.textContent='显示 '+list.length+' / '+phraseData.length+' 条短语';
- $('#phraseFilters [data-phrasefilter]').forEach(b=>b.classList.toggle('active',b.dataset.phrasefilter===filter));
+ $$('#phraseFilters [data-phrasefilter]').forEach(b=>b.classList.toggle('active',b.dataset.phrasefilter===filter));
  const grid=$('#phraseGrid');if(!grid)return;
  grid.innerHTML=list.map(p=>'<article class="reference-card"><div class="reference-card-top"><span class="reference-word-text">'+escapeHtml(p.phrase)+'</span><span class="reference-tag">'+escapeHtml(p.category)+'</span></div><p class="reference-meaning">'+escapeHtml(p.meaning)+'</p><div class="reference-example"><b>'+escapeHtml(p.example)+'</b><br><span>'+escapeHtml(p.translation)+'</span></div></article>').join('')||'<div class="empty-state">没有找到相关短语，试试更短的关键词。</div>';
 }
