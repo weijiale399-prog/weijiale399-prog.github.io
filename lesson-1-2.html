@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#dff3ff">
+<title>新概念英语第一册 · 互动学习小站</title>
+<style>
+:root{--sky:#62b9f2;--sky2:#dff3ff;--blue:#238bd0;--ink:#263746;--muted:#718596;--paper:#fff;--line:#e6f0f6;--mint:#e8faf4;--yellow:#fff7dc;--pink:#fff0f4;--shadow:0 12px 35px rgba(50,130,180,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(135deg,#eff9ff 0%,#f8fcff 48%,#edf8ff 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);line-height:1.7}
+button{font:inherit;cursor:pointer}.app{max-width:1440px;margin:auto;min-height:100vh;display:grid;grid-template-columns:270px 1fr;gap:24px;padding:24px}
+.sidebar{position:sticky;top:20px;height:calc(100vh - 40px);overflow:auto;background:rgba(255,255,255,.88);border:1px solid #e3f2fb;border-radius:28px;padding:22px 16px;box-shadow:var(--shadow)}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 8px 20px}.brand-icon{width:48px;height:48px;border-radius:17px;background:linear-gradient(145deg,#9bdcff,#4eafea);display:grid;place-items:center;color:white;font-size:25px;box-shadow:0 8px 18px #8acff055}.brand strong{display:block;font-size:16px}.brand small{color:var(--muted)}
+.nav-label{font-size:11px;color:#91a4b3;font-weight:800;letter-spacing:1.5px;padding:12px 12px 7px}
+.nav-btn{width:100%;border:0;background:transparent;text-align:left;padding:11px 13px;border-radius:14px;color:#526777;display:flex;align-items:center;gap:10px;margin:3px 0;transition:.2s}.nav-btn:hover{background:#f0f9ff}.nav-btn.active{background:#e4f5ff;color:#167dbd;font-weight:750}.lesson-dot{width:28px;height:28px;border-radius:10px;background:#f0f6fa;display:grid;place-items:center;font-size:12px;font-weight:800}.nav-btn.active .lesson-dot{background:#bde6ff;color:#116da8}
+.side-note{margin:20px 5px 0;padding:14px;border-radius:18px;background:#f0f9ff;color:#688092;font-size:12px}
+main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;margin:4px 4px 18px;gap:12px}.crumb{color:#8ba0af;font-size:13px}.top-actions{display:flex;gap:8px}.tiny-btn{border:1px solid #dceef8;background:#fff;color:#4f86a8;border-radius:12px;padding:8px 12px;font-size:12px}
+.hero{background:linear-gradient(120deg,#dff4ff,#eefaff 65%,#e5f8ff);border:1px solid #d4edfb;border-radius:30px;padding:30px 34px;position:relative;overflow:hidden;box-shadow:var(--shadow);margin-bottom:20px}.hero:after{content:"☁";position:absolute;right:9%;top:-20px;font-size:120px;color:#fff9;transform:rotate(-12deg)}.hero:before{content:"✦";position:absolute;right:25%;bottom:15px;font-size:28px;color:#fff}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#459aca}.hero h1{font-size:clamp(25px,4vw,38px);line-height:1.25;margin:8px 0;color:#23465c}.hero p{color:#58788c;max-width:690px;margin:0}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.tag{font-size:12px;padding:6px 11px;border-radius:999px;background:#ffffffb8;color:#397da5;border:1px solid #d3ebf8}
+.progress-card{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:15px 18px;margin-bottom:20px;box-shadow:var(--shadow)}.progress-text{min-width:110px;font-size:13px;font-weight:750}.progress-track{height:9px;border-radius:99px;background:#edf4f8;flex:1;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#77c9f7,#3a9fe0);border-radius:99px;transition:.3s}.progress-count{font-size:12px;color:#6791aa;white-space:nowrap}
+.lesson-panel{display:none}.lesson-panel.active{display:block}.section{background:#fff;border:1px solid var(--line);border-radius:24px;padding:23px;margin:17px 0;box-shadow:var(--shadow)}.section-head{display:flex;align-items:center;gap:10px;margin-bottom:15px}.section-icon{width:36px;height:36px;border-radius:12px;background:#e8f6ff;display:grid;place-items:center;font-size:18px}.section h2{font-size:19px;margin:0;color:#29495e}.section-sub{font-size:12px;color:#91a2ae;margin-left:auto}.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mini{background:#f5fbff;border:1px solid #e7f4fb;border-radius:17px;padding:14px}.mini b{display:block;color:#357da6;margin-bottom:4px}.mini span{font-size:13px;color:#718695}
+.callout{padding:14px 16px;border-radius:16px;background:#eff9ff;border-left:4px solid #72c4f2;color:#58788b;font-size:14px;margin:12px 0}.callout.yellow{background:#fff9e8;border-color:#f2cd68}.callout.mint{background:#effbf6;border-color:#75cba7}
+.word-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.word{border:1px solid #e5f1f8;background:#fbfdff;border-radius:16px;padding:13px 15px;text-align:left;transition:.2s}.word:hover{border-color:#8dcff3;transform:translateY(-1px);background:#f2faff}.word .en{font-weight:800;color:#287eaf;font-size:16px}.word .meta{font-size:11px;color:#91a1ad;margin-left:7px}.word .zh{display:block;font-size:13px;color:#637c8e}.word-detail{margin-top:12px;padding:15px;border-radius:16px;background:#eaf7ff;display:none}.word-detail.show{display:block}.word-detail strong{color:#207eaf}
+.phrase-list{display:grid;gap:10px}.phrase{padding:13px 15px;border-radius:15px;background:#f8fcff;border:1px solid #e8f3f9}.phrase b{color:#267eaf}.phrase p{margin:4px 0 0;font-size:13px;color:#6e8493}
+.pattern{border:1px solid #e3f0f7;border-radius:18px;padding:16px;margin:10px 0;background:#fbfdff}.formula{font-weight:850;color:#197fb9;font-size:17px;letter-spacing:.2px}.pattern p{margin:6px 0;color:#647d8d;font-size:14px}.example{background:#f1f9ff;border-radius:12px;padding:10px 12px;margin-top:8px;font-size:14px}.grammar-label{display:inline-block;background:#dff2ff;color:#237fb4;font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;margin:4px 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare>div{padding:14px;border-radius:16px;background:#f6fbff;border:1px solid #e7f2f8}.compare h3{font-size:15px;margin:0 0 5px;color:#367fa6}.compare p{font-size:13px;margin:0;color:#6e8492}
+.steps{counter-reset:step;display:grid;gap:10px}.step{position:relative;padding:12px 14px 12px 48px;background:#f8fcff;border-radius:15px;border:1px solid #eaf3f8}.step:before{counter-increment:step;content:counter(step);position:absolute;left:13px;top:12px;width:24px;height:24px;border-radius:9px;background:#dff2ff;color:#2585bd;font-weight:800;text-align:center;font-size:13px}
+.quiz-q{padding:15px;border:1px solid #e5f1f7;border-radius:17px;margin:12px 0}.quiz-q h3{font-size:15px;margin:0 0 10px}.option{display:block;width:100%;text-align:left;border:1px solid #e7eff4;background:#fff;border-radius:12px;padding:9px 12px;margin:6px 0;color:#536c7c}.option:hover{background:#f1f9ff;border-color:#9dd6f4}.option.correct{background:#eafaf2;border-color:#7acba3;color:#267b52}.option.wrong{background:#fff1f2;border-color:#e9a3a9;color:#a64e58}.feedback{font-size:13px;color:#647e8d;margin-top:8px;min-height:22px}.reveal{border:0;background:#e5f5ff;color:#277fae;border-radius:12px;padding:9px 13px;font-size:13px}.answer{display:none;margin-top:9px;background:#f0faf5;border-radius:12px;padding:10px 12px;font-size:13px;color:#4e7a65}.answer.show{display:block}
+.footer{text-align:center;color:#9aabb6;font-size:12px;padding:25px 8px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#284e65;color:white;padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
+@media(max-width:850px){.app{display:block;padding:12px}.sidebar{position:relative;top:auto;height:auto;margin-bottom:14px;padding:12px;border-radius:20px}.brand{padding-bottom:8px}.nav-label{padding-top:7px}.nav-row{display:flex;overflow:auto;gap:5px}.nav-btn{width:auto;white-space:nowrap;padding:8px 10px}.side-note{display:none}.hero{padding:24px;border-radius:23px}.section{padding:17px;border-radius:20px}.intro-grid{grid-template-columns:1fr}.topbar{margin:6px 2px 12px}.word-grid,.compare{grid-template-columns:1fr}}
+@media(min-width:851px){.nav-row{display:block}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">☁</div><div><strong>新概念英语 · 小小课堂</strong><small>Book 1 · 互动学习站</small></div></div>
+  <div class="nav-label">课程目录 · COURSE</div>
+  <div class="nav-row">
+    <button class="nav-btn active" data-lesson="1"><span class="lesson-dot">01</span> 第1课 · Excuse me!</button>
+    <button class="nav-btn" data-lesson="2"><span class="lesson-dot">02</span> 第2课 · Is this your…?</button>
+    <button class="nav-btn" data-lesson="3"><span class="lesson-dot">03</span> 第3课 · Sorry, sir.</button>
+    <button class="nav-btn" data-lesson="4"><span class="lesson-dot">04</span> 第4课 · Is this your…?</button>
+  </div>
+  <div class="nav-label">学习小工具</div>
+  <button class="nav-btn" onclick="document.getElementById('progress').scrollIntoView({behavior:'smooth'})">🌟 我的学习进度</button>
+  <div class="side-note">🩵 慢慢学、反复练。今天比昨天多会说一句，就很棒啦！<br><br>点击蓝色单词卡片，可以查看词性、意思和用法。</div>
+</aside>
+<main>
+  <div class="topbar"><div class="crumb">学习空间　/　新概念英语第一册</div><div class="top-actions"><button class="tiny-btn" onclick="window.print()">打印本课</button><button class="tiny-btn" onclick="resetProgress()">重置进度</button></div></div>
+  <header class="hero">
+    <div class="eyebrow">HELLO, LITTLE ENGLISH LEARNER ✦</div>
+    <h1>每天进步一点点，<br>英语慢慢就会开口啦！</h1>
+    <p>天蓝色的英语学习小站。先理解，再开口；先学会一句，再把它用到生活里。每一课都包含单词、短语、句型、语法、易错点和练习。</p>
+    <div class="hero-tags"><span class="tag">☁️ 初学者友好</span><span class="tag">🩵 重点语法拆解</span><span class="tag">✏️ 即时练习</span><span class="tag">🎤 开口表达</span></div>
+  </header>
+  <div class="progress-card" id="progress"><div class="progress-text">🌱 本站学习进度</div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-count" id="progressCount">完成 0 / 2 课</div></div>
+
+  <section class="lesson-panel active" id="lesson1">
+    <div class="section">
+      <div class="section-head"><div class="section-icon">📘</div><h2>第1课 · Excuse me!</h2><span class="section-sub">打招呼与礼貌开口</span></div>
+      <div class="intro-grid">
+        <div class="mini"><b>🎯 本课目标</b><span>学会礼貌地引起别人注意，听懂简单回应。</span></div>
+        <div class="mini"><b>🧩 核心内容</b><span>Excuse me、Yes?、Pardon? 等日常表达。</span></div>
+        <div class="mini"><b>🗣️ 开口目标</b><span>能够自然地开始一段简短对话。</span></div>
+      </div>
+      <div class="callout"><b>先说明一下：</b>新概念第一册第1、2课是一段连续对话的前后部分。这里把第1课重点放在“如何礼貌地开口、如何回应”；第2课重点放在“This is…?”和“your”的表达，避免把两课内容混成一课。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🔤</div><h2>一、核心单词</h2><span class="section-sub">点击单词看详细解释</span></div>
+      <div class="word-grid">
+        <button class="word" onclick="showWord('excuse')"><span class="en">excuse <small>/ɪkˈskjuːz/</small></span><span class="meta">动词</span><span class="zh">原谅；宽恕（在固定表达中使用）</span></button>
+        <button class="word" onclick="showWord('me')"><span class="en">me <small>/miː/</small></span><span class="meta">代词</span><span class="zh">我（作宾语时使用）</span></button>
+        <button class="word" onclick="showWord('yes')"><span class="en">yes <small>/jes/</small></span><span class="meta">副词 / 回答词</span><span class="zh">是；是的</span></button>
+        <button class="word" onclick="showWord('pardon')"><span class="en">pardon <small>/ˈpɑːdn/</small></span><span class="meta">表达用语</span><span class="zh">请再说一遍；什么？</span></button>
+        <button class="word" onclick="showWord('sir')"><span class="en">sir <small>/sɜː(r)/</small></span><span class="meta">称呼语</span><span class="zh">先生（礼貌称呼男性）</span></button>
+        <button class="word" onclick="showWord('thank')"><span class="en">thank <small>/θæŋk/</small></span><span class="meta">动词</span><span class="zh">感谢；谢谢</span></button>
+      </div>
+      <div class="word-detail" id="wordDetail"><strong id="wordTitle"></strong><div id="wordBody"></div></div>
+      <div class="callout yellow">小提醒：<b>Excuse me</b> 是一个整体表达。不要只按 excuse 和 me 的中文意思硬拼，记住它在生活中的使用场景更重要。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">💬</div><h2>二、重点短语与什么时候用</h2></div>
+      <div class="phrase-list">
+        <div class="phrase"><b>Excuse me.</b><p>劳驾；打扰一下。想问路、想请别人让一下，或想礼貌地引起注意时使用。例：Excuse me, where is the bus stop?（打扰一下，公交车站在哪里？）<br><span class="grammar-label">语法句型</span> 固定礼貌表达，整体记忆，不需要自己拆开造句。</p></div>
+        <div class="phrase"><b>Yes?</b><p>嗯？ / 什么事？别人叫你时，可以用它表示“我在听，你说吧”。语气要自然，不是每次都翻译成“是的”。<br><span class="grammar-label">语法句型</span> 简短回应句，省略了完整句子，日常对话中很常见。</p></div>
+        <div class="phrase"><b>Pardon?</b><p>请再说一遍？没听清对方的话时使用。语气礼貌。<br><span class="grammar-label">语法句型</span> 固定疑问表达，用来请求对方重复刚才的话。</p></div>
+        <div class="phrase"><b>Thank you.</b><p>谢谢。别人帮助你、给你东西或提供服务时使用。<br><span class="grammar-label">语法句型</span> 固定感谢表达；也可以说 Thank you very much.（非常感谢。）</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🧠</div><h2>三、句型与语法拆解</h2></div>
+      <div class="pattern"><div class="formula">Excuse me.</div><p><b>意思：</b>打扰一下 / 劳驾。</p><p><b>怎么用：</b>在提出问题或请求之前，先礼貌地引起对方注意。</p><div class="example">Excuse me.（打扰一下。）<br><span class="grammar-label">语法句型</span> 固定礼貌表达，不按普通“主语 + 谓语”句子分析。</div></div>
+      <div class="pattern"><div class="formula">Yes?</div><p><b>意思：</b>嗯？有什么事吗？</p><p><b>怎么用：</b>有人叫你时，表示你已经注意到对方。</p><div class="example">A: Excuse me.　B: Yes?（甲：打扰一下。乙：什么事？）<br><span class="grammar-label">语法句型</span> 简短回应，口语中常省略完整表达。</div></div>
+      <div class="pattern"><div class="formula">Thank you (very much).</div><p><b>意思：</b>谢谢（非常感谢）。</p><p><b>拆开看：</b>thank 是“感谢”；you 是“你”。这里的 you 是感谢的对象。</p><div class="example">Thank you very much.（非常感谢。）<br><span class="grammar-label">语法句型</span> 固定感谢表达；very much 用来加强感谢的程度。</div></div>
+      <div class="callout mint"><b>本课先掌握这件事：</b>英语交流不只是背单词。像 Excuse me、Pardon、Thank you 这样的整块表达，要连同使用场景一起记。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🎧</div><h2>四、发音与口语小提示</h2></div>
+      <div class="steps">
+        <div class="step"><b>Excuse me</b>：两个词要连贯读出来，练习时先慢读，再逐渐读自然。注意 excuse 开头是短促的 /ɪ/ 音。</div>
+        <div class="step"><b>Pardon?</b>：句尾语调通常上扬，表达“没听清，请再说一遍？”</div>
+        <div class="step"><b>Thank you</b>：thank 的 th 是舌尖轻触上下齿之间发出的气音，不要直接读成 s 或 f。</div>
+      </div>
+      <div class="callout">发音练习顺序：先听标准发音 → 跟读 3 次 → 不看文字说 1 次。重点是清楚、自然，不用一开始就追求很快。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">✏️</div><h2>五、互动小测验</h2></div>
+      <div class="quiz-q" data-answer="b"><h3>1. 想礼貌地引起陌生人的注意，最合适说什么？</h3><button class="option" data-choice="a">Pardon?</button><button class="option" data-choice="b">Excuse me.</button><button class="option" data-choice="c">Thank you.</button><div class="feedback"></div></div>
+      <div class="quiz-q" data-answer="a"><h3>2. 别人叫你，你想表示“嗯？什么事？”，可以说：</h3><button class="option" data-choice="a">Yes?</button><button class="option" data-choice="b">Goodbye.</button><button class="option" data-choice="c">Sorry.</button><div class="feedback"></div></div>
+      <div class="quiz-q" data-answer="c"><h3>3. 没听清对方说的话，礼貌地请他重复，可以说：</h3><button class="option" data-choice="a">Thank you.</button><button class="option" data-choice="b">Excuse me.</button><button class="option" data-choice="c">Pardon?</button><div class="feedback"></div></div>
+      <button class="reveal" onclick="markLesson(1)">✓ 我完成第1课学习</button>
+    </div>
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🎤</div><h2>六、开口表达练习</h2></div>
+      <p>先看中文，试着自己说英文。说完再点开参考表达。不要只在心里默念，尽量真的说出声。</p>
+      <div class="phrase"><b>场景 1：</b>你想问一位路人公交车站在哪里。<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">Excuse me. Where is the bus stop?<br><span class="grammar-label">语法句型</span> Excuse me 是礼貌开场；Where is…? 用来询问地点。</div></div>
+      <div class="phrase"><b>场景 2：</b>有人叫你，你回应“嗯？”。<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">Yes?<br><span class="grammar-label">语法句型</span> 简短回应表达。</div></div>
+      <div class="phrase"><b>场景 3：</b>别人帮了你，你说“非常感谢”。<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">Thank you very much.<br><span class="grammar-label">语法句型</span> 固定感谢表达。</div></div>
+    </div>
+  </section>
+
+  <section class="lesson-panel" id="lesson2">
+    <div class="section">
+      <div class="section-head"><div class="section-icon">📗</div><h2>第2课 · Is this your…?</h2><span class="section-sub">询问物品是不是某人的</span></div>
+      <div class="intro-grid">
+        <div class="mini"><b>🎯 本课目标</b><span>能询问“这是你的……吗？”，并回答是或不是。</span></div>
+        <div class="mini"><b>🧩 核心内容</b><span>Is this…? / your / my / Yes, it is.</span></div>
+        <div class="mini"><b>🗣️ 开口目标</b><span>能用身边物品进行简单问答。</span></div>
+      </div>
+      <div class="callout">本课的关键不是背一句话，而是学会一个可以替换物品名称的句型。把 handbag 换成 book、pen、coat 等你认识的单词，就能说出新的句子。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🔤</div><h2>一、核心单词</h2><span class="section-sub">点击查看详细用法</span></div>
+      <div class="word-grid">
+        <button class="word" onclick="showWord('is')"><span class="en">is <small>/ɪz/</small></span><span class="meta">be动词</span><span class="zh">是；用于 he / she / it 或单数名词</span></button>
+        <button class="word" onclick="showWord('this')"><span class="en">this <small>/ðɪs/</small></span><span class="meta">指示代词</span><span class="zh">这个；指离说话人较近的一个人或物</span></button>
+        <button class="word" onclick="showWord('your')"><span class="en">your <small>/jɔː(r)/</small></span><span class="meta">形容词性物主代词</span><span class="zh">你的；你们的</span></button>
+        <button class="word" onclick="showWord('my')"><span class="en">my <small>/maɪ/</small></span><span class="meta">形容词性物主代词</span><span class="zh">我的</span></button>
+        <button class="word" onclick="showWord('handbag')"><span class="en">handbag <small>/ˈhændbæɡ/</small></span><span class="meta">名词</span><span class="zh">手提包；女用手提包</span></button>
+        <button class="word" onclick="showWord('it')"><span class="en">it <small>/ɪt/</small></span><span class="meta">代词</span><span class="zh">它；这里代指前面提到的物品</span></button>
+        <button class="word" onclick="showWord('very')"><span class="en">very <small>/ˈveri/</small></span><span class="meta">副词</span><span class="zh">很；非常</span></button>
+        <button class="word" onclick="showWord('much')"><span class="en">much <small>/mʌtʃ/</small></span><span class="meta">副词 / 限定词</span><span class="zh">很；多（在 thank you very much 中加强语气）</span></button>
+      </div>
+      <div class="word-detail" id="wordDetail2"><strong id="wordTitle2"></strong><div id="wordBody2"></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🧺</div><h2>二、重点短语与搭配</h2></div>
+      <div class="phrase-list">
+        <div class="phrase"><b>your handbag</b><p>你的手提包。your 后面通常接一个名词，表示这个东西属于“你”。<br><span class="grammar-label">语法句型</span> your + 名词，表示“你的……”</p></div>
+        <div class="phrase"><b>my book / my pen</b><p>我的书 / 我的钢笔。my 和 your 一样，后面接名词。<br><span class="grammar-label">语法句型</span> my + 名词，表示“我的……”</p></div>
+        <div class="phrase"><b>Thank you very much.</b><p>非常感谢。可用于对方确认物品、帮忙或给予东西之后。<br><span class="grammar-label">语法句型</span> 固定感谢表达。</p></div>
+        <div class="phrase"><b>Yes, it is. / No, it isn't.</b><p>是的，它是。/ 不，它不是。回答 Is this…? 时，用 it 来代指刚才问到的那个物品。<br><span class="grammar-label">语法句型</span> Yes/No 简短回答：Yes, it is. / No, it isn't.</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🧠</div><h2>三、核心句型：一步一步拆开</h2></div>
+      <div class="pattern"><div class="formula">Is this your + 名词?</div><p><b>中文：</b>这是你的……吗？</p><p><b>结构：</b>Is（be动词）+ this（这个）+ your（你的）+ 名词？</p><div class="example">Is this your book?（这是你的书吗？）<br><span class="grammar-label">语法句型</span> 一般疑问句：Be动词 + 主语 + 其他部分？这里 this 是主语。</div><div class="example">Is this your pen?（这是你的钢笔吗？）<br><span class="grammar-label">语法句型</span> 同一个句型，只替换最后的名词。</div></div>
+      <div class="pattern"><div class="formula">Yes, it is.</div><p><b>中文：</b>是的，它是。</p><p><b>什么时候用：</b>对 Is this…? 作肯定回答。</p><div class="example">A: Is this your bag?　B: Yes, it is.（这是你的包吗？是的。）<br><span class="grammar-label">语法句型</span> Yes + 主语 + be动词。这里用 it 指代前面提到的物品。</div></div>
+      <div class="pattern"><div class="formula">No, it isn't.</div><p><b>中文：</b>不，它不是。</p><p><b>什么时候用：</b>对 Is this…? 作否定回答。</p><div class="example">A: Is this your book?　B: No, it isn't.（这是你的书吗？不，它不是。）<br><span class="grammar-label">语法句型</span> No + 主语 + be动词 + not。isn't = is not。</div></div>
+      <div class="pattern"><div class="formula">This is my + 名词.</div><p><b>中文：</b>这是我的……</p><p><b>注意：</b>陈述句中 this 在前，is 在后。</p><div class="example">This is my pen.（这是我的钢笔。）<br><span class="grammar-label">语法句型</span> 肯定陈述句：This（主语）+ is（be动词）+ my pen（后面的部分）。</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🔍</div><h2>四、容易混淆的地方</h2></div>
+      <div class="compare">
+        <div><h3>this 和 it</h3><p><b>this</b>：指着眼前的东西说“这个”。<br><b>it</b>：用来接着指代已经提到的那个东西。<br>问句用 this，回答里常用 it。</p></div>
+        <div><h3>my 和 your</h3><p><b>my</b>：我的。<br><b>your</b>：你的 / 你们的。<br>它们后面都要接名词，例如 my bag、your book。</p></div>
+        <div><h3>陈述句和一般疑问句</h3><p><b>This is…</b>：这是……（告诉别人）。<br><b>Is this…?</b>：这是……吗？（向别人提问）。<br>把 is 放到 this 前面，就变成提问。</p></div>
+        <div><h3>isn't 是什么</h3><p><b>isn't = is not</b>，意思是“不是”。<br>回答时说 No, it isn't.，不要说 No, it is not?。</p></div>
+      </div>
+      <div class="callout yellow">特别注意：<b>your book</b> 中间不能漏掉名词 book。my / your 不能单独直接放在这里代替“我的 / 你的那个东西”。</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🧩</div><h2>五、把句型变成自己的话</h2></div>
+      <p>只要替换最后的名词，就能练习很多真实场景：</p>
+      <div class="phrase-list">
+        <div class="phrase"><b>Is this your book?</b><p>这是你的书吗？<br><span class="grammar-label">语法句型</span> Is this your + 单数名词?</p></div>
+        <div class="phrase"><b>Is this your coat?</b><p>这是你的外套吗？<br><span class="grammar-label">语法句型</span> 同上，只替换名词 coat。</p></div>
+        <div class="phrase"><b>Is this your cup?</b><p>这是你的杯子吗？<br><span class="grammar-label">语法句型</span> 同上，只替换名词 cup。</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">✏️</div><h2>六、互动小测验</h2></div>
+      <div class="quiz-q" data-answer="b"><h3>1. “这是你的书吗？”应该怎么说？</h3><button class="option" data-choice="a">This is your book?</button><button class="option" data-choice="b">Is this your book?</button><button class="option" data-choice="c">Are this your book?</button><div class="feedback"></div></div>
+      <div class="quiz-q" data-answer="a"><h3>2. Is this your pen? 肯定回答是：</h3><button class="option" data-choice="a">Yes, it is.</button><button class="option" data-choice="b">Yes, this is.</button><button class="option" data-choice="c">Yes, I am.</button><div class="feedback"></div></div>
+      <div class="quiz-q" data-answer="c"><h3>3. “我的包”应该选择哪一个？</h3><button class="option" data-choice="a">I bag</button><button class="option" data-choice="b">you bag</button><button class="option" data-choice="c">my bag</button><div class="feedback"></div></div>
+      <div class="quiz-q" data-answer="b"><h3>4. No, it isn't. 中 isn't 的完整形式是：</h3><button class="option" data-choice="a">is nots</button><button class="option" data-choice="b">is not</button><button class="option" data-choice="c">it not</button><div class="feedback"></div></div>
+      <button class="reveal" onclick="markLesson(2)">✓ 我完成第2课学习</button>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div class="section-icon">🎤</div><h2>七、开口造句练习</h2></div>
+      <p>请先自己说，再看参考答案。重点是把句型说顺，不需要追求速度。</p>
+      <div class="phrase"><b>练习 1：</b>这是你的钢笔吗？<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">Is this your pen?<br><span class="grammar-label">语法句型</span> Is + this + your + 单数名词?</div></div>
+      <div class="phrase"><b>练习 2：</b>是的，它是。<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">Yes, it is.<br><span class="grammar-label">语法句型</span> Yes + it + is，回答 Is this…? 的肯定回答。</div></div>
+      <div class="phrase"><b>练习 3：</b>不，这是我的书。（提示：先说“不”，再说“这是我的书”。）<br><button class="reveal" onclick="toggleAnswer(this)">查看参考表达</button><div class="answer">No, it isn't. This is my book.<br><span class="grammar-label">语法句型</span> No, it isn't. 是否定简答；This is my book. 是肯定陈述句。</div></div>
+    </div>
+    <div class="section"><div class="section-head"><div class="section-icon">🌟</div><h2>八、本课复习清单</h2></div>
+      <label><input type="checkbox" class="study-check"> 我知道 this 表示“这个”。</label><br>
+      <label><input type="checkbox" class="study-check"> 我知道 my 和 your 后面接名词。</label><br>
+      <label><input type="checkbox" class="study-check"> 我能说 Is this your…?</label><br>
+      <label><input type="checkbox" class="study-check"> 我能回答 Yes, it is. / No, it isn't.</label><br>
+      <label><input type="checkbox" class="study-check"> 我能不看提示，自己造出至少两个句子。</label>
+    </div>
+  </section>
+
+  <section class="lesson-panel" id="lesson3"><div class="section"><div class="section-head"><div class="section-icon">🩵</div><h2>第3课 · Sorry, sir.</h2></div><p>课程目录先保留位置。完成第1、2课的详细讲解后，再按同样标准逐课补充，避免只放目录、内容却不完整。</p></div></section>
+  <section class="lesson-panel" id="lesson4"><div class="section"><div class="section-head"><div class="section-icon">🩵</div><h2>第4课 · Is this your…?</h2></div><p>课程目录先保留位置。后续课程会继续加入单词、短语、句型、语法、发音、易错点、自动批改练习和口语输出。</p></div></section>
+  <div class="footer">Made with ☁️ and a little blue sky · 新概念英语第一册学习小站</div>
+</main>
+</div>
+<div class="toast" id="toast">已记录本课完成 ✨</div>
+<script>
+const wordInfo={
+excuse:['excuse /ɪkˈskjuːz/','动词：原谅、宽恕。','在 Excuse me 里，它和 me 组成固定礼貌表达，用来打扰别人或引起注意。例：Excuse me, can you help me?（打扰一下，你能帮我吗？）'],
+me:['me /miː/','人称代词的宾格：我。','当“我”是动作涉及的对象时使用 me。例：Help me, please.（请帮帮我。）本课先把 Excuse me 当作整体记忆。'],
+yes:['yes /jes/','回答词：是；是的。','可以回答一般疑问句，也可以单独回应别人。别人叫你时说 Yes?，意思接近“嗯？什么事？”。'],
+pardon:['pardon /ˈpɑːdn/','礼貌表达：请再说一遍？','没听清楚对方时使用。说 Pardon? 时，语调通常稍微上扬。'],
+sir:['sir /sɜː(r)/','礼貌称呼：先生。','常用于礼貌地称呼男性，尤其在服务、正式或较礼貌的场景中。'],
+thank:['thank /θæŋk/','动词：感谢。','常见搭配是 thank you（谢谢）。thank 的 th 要练舌尖轻触齿间的气音。'],
+is:['is /ɪz/','be 动词的一种形式。','常和 he、she、it、this 以及单数名词搭配。例：This is a book.（这是一本书。）语法句型：This + is + 名词。'],
+this:['this /ðɪs/','指示代词：这个。','通常指离说话人较近的一个人或物。例：This is my pen.（这是我的钢笔。）语法句型：This + is + 名词/其他补充部分。'],
+your:['your /jɔː(r)/','形容词性物主代词：你的；你们的。','后面要接名词。例：your book（你的书）、your bag（你的包）。语法句型：your + 名词。'],
+my:['my /maɪ/','形容词性物主代词：我的。','后面要接名词。例：my pen（我的钢笔）、my coat（我的外套）。语法句型：my + 名词。'],
+handbag:['handbag /ˈhændbæɡ/','名词：手提包。','hand 是“手”，bag 是“包”；handbag 指手提包。例：This is my handbag.（这是我的手提包。）语法句型：This is + my + 名词。'],
+it:['it /ɪt/','人称代词：它。','用来代指前面已经提到的事物。例：It is my book.（它是我的书。）语法句型：It + is + 名词/其他补充部分。'],
+very:['very /ˈveri/','副词：很；非常。','用来加强程度。例：very good（非常好）。在 thank you very much 中，very 和 much 一起加强感谢语气。'],
+much:['much /mʌtʃ/','副词等用法：很；多。','在 thank you very much 这个固定表达里，和 very 一起表示“非常”。例：Thank you very much.（非常感谢。）']
+};
+function showWord(key){const info=wordInfo[key];let box=document.querySelector('.lesson-panel.active #wordDetail');if(!box)box=document.getElementById('wordDetail');if(!box || !info)return;box.querySelector('strong').textContent=info[0];box.querySelector('div').innerHTML='<b>'+info[1]+'</b><br>'+info[2];box.classList.add('show');}
+document.querySelectorAll('.nav-btn[data-lesson]').forEach(btn=>btn.addEventListener('click',()=>{let n=btn.dataset.lesson;document.querySelectorAll('.nav-btn[data-lesson]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.toggle('active',p.id==='lesson'+n));window.scrollTo({top:0,behavior:'smooth'});}));
+document.querySelectorAll('.quiz-q').forEach(q=>q.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{let ok=btn.dataset.choice===q.dataset.answer;q.querySelectorAll('.option').forEach(o=>o.classList.remove('correct','wrong'));btn.classList.add(ok?'correct':'wrong');q.querySelector('.feedback').textContent=ok?'答对啦！很棒，继续保持。':'再想一想哦。先看清题目问的是哪种表达，再试一次。';})));
+function toggleAnswer(btn){btn.nextElementSibling.classList.toggle('show');btn.textContent=btn.nextElementSibling.classList.contains('show')?'收起参考表达':'查看参考表达';}
+function markLesson(n){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');if(!done.includes(n))done.push(n);localStorage.setItem('nc_done',JSON.stringify(done));updateProgress();document.getElementById('toast').classList.add('show');setTimeout(()=>document.getElementById('toast').classList.remove('show'),1800);}
+function updateProgress(){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');document.getElementById('progressFill').style.width=(done.length/2*100)+'%';document.getElementById('progressCount').textContent='完成 '+done.length+' / 2 课';}
+function resetProgress(){if(confirm('确定要清除已完成的课程记录吗？')){localStorage.removeItem('nc_done');updateProgress();}}
+updateProgress();
+</script>
+</body></html>
