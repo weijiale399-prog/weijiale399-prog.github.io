@@ -28,6 +28,7 @@ main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:
 .footer{text-align:center;color:#9aabb6;font-size:12px;padding:25px 8px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#284e65;color:white;padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
 @media(max-width:850px){.app{display:block;padding:12px}.sidebar{position:relative;top:auto;height:auto;margin-bottom:14px;padding:12px;border-radius:20px}.brand{padding-bottom:8px}.nav-label{padding-top:7px}.nav-row{display:flex;overflow:auto;gap:5px}.nav-btn{width:auto;white-space:nowrap;padding:8px 10px}.side-note{display:none}.hero{padding:24px;border-radius:23px}.section{padding:17px;border-radius:20px}.intro-grid{grid-template-columns:1fr}.topbar{margin:6px 2px 12px}.word-grid,.compare{grid-template-columns:1fr}}
 @media(min-width:851px){.nav-row{display:block}}
+ .lesson-embed{display:block;width:100%;height:1100px;min-height:900px;border:0;background:transparent;border-radius:18px} 
 </style>
 </head>
 <body>
@@ -214,8 +215,8 @@ main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:
     </div>
   </section>
 
-  <section class="lesson-panel" id="lesson3"><div class="section"><div class="section-head"><div class="section-icon">🩵</div><h2>第3课 · Sorry, sir.</h2></div><p>课程目录先保留位置。完成第1、2课的详细讲解后，再按同样标准逐课补充，避免只放目录、内容却不完整。</p></div></section>
-  <section class="lesson-panel" id="lesson4"><div class="section"><div class="section-head"><div class="section-icon">🩵</div><h2>第4课 · Is this your…?</h2></div><p>课程目录先保留位置。后续课程会继续加入单词、短语、句型、语法、发音、易错点、自动批改练习和口语输出。</p></div></section>
+  <section class="lesson-panel" id="lesson3"><iframe class="lesson-embed" title="第3课笔记" src="lesson-3-4.html?embed=3" loading="lazy"></iframe></section>
+  <section class="lesson-panel" id="lesson4"><iframe class="lesson-embed" title="第4课笔记" src="lesson-3-4.html?embed=4" loading="lazy"></iframe></section>
   <div class="footer">Made with ☁️ and a little blue sky · 新概念英语第一册学习小站</div>
 </main>
 </div>
@@ -238,7 +239,7 @@ very:['very /ˈveri/','副词：很；非常。','用来加强程度。例：ver
 much:['much /mʌtʃ/','副词等用法：很；多。','在 thank you very much 这个固定表达里，和 very 一起表示“非常”。例：Thank you very much.（非常感谢。）']
 };
 function showWord(key){const info=wordInfo[key];let box=document.querySelector('.lesson-panel.active #wordDetail');if(!box)box=document.getElementById('wordDetail');if(!box || !info)return;box.querySelector('strong').textContent=info[0];box.querySelector('div').innerHTML='<b>'+info[1]+'</b><br>'+info[2];box.classList.add('show');}
-document.querySelectorAll('.nav-btn[data-lesson]').forEach(btn=>btn.addEventListener('click',()=>{let n=btn.dataset.lesson;document.querySelectorAll('.nav-btn[data-lesson]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.toggle('active',p.id==='lesson'+n));window.scrollTo({top:0,behavior:'smooth'});}));
+document.querySelectorAll('.nav-btn[data-lesson]').forEach(btn=>btn.addEventListener('click',()=>{let n=btn.dataset.lesson;document.querySelectorAll('.nav-btn[data-lesson]').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.toggle('active',p.id==='lesson'+n));window.scrollTo({top:0,behavior:'smooth'});const frame=document.querySelector('#lesson'+n+' .lesson-embed');if(frame){const resize=()=>{try{frame.style.height=frame.contentDocument.documentElement.scrollHeight+'px'}catch(e){}};frame.addEventListener('load',resize,{once:true});setTimeout(resize,500);}}));
 document.querySelectorAll('.quiz-q').forEach(q=>q.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{let ok=btn.dataset.choice===q.dataset.answer;q.querySelectorAll('.option').forEach(o=>o.classList.remove('correct','wrong'));btn.classList.add(ok?'correct':'wrong');q.querySelector('.feedback').textContent=ok?'答对啦！很棒，继续保持。':'再想一想哦。先看清题目问的是哪种表达，再试一次。';})));
 function toggleAnswer(btn){btn.nextElementSibling.classList.toggle('show');btn.textContent=btn.nextElementSibling.classList.contains('show')?'收起参考表达':'查看参考表达';}
 function markLesson(n){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');if(!done.includes(n))done.push(n);localStorage.setItem('nc_done',JSON.stringify(done));updateProgress();document.getElementById('toast').classList.add('show');setTimeout(()=>document.getElementById('toast').classList.remove('show'),1800);}
