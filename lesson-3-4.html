@@ -124,4 +124,15 @@ document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{doc
 document.querySelectorAll('.quiz').forEach(q=>q.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{let ok=b.dataset.c===q.dataset.answer;q.querySelectorAll('.opt').forEach(x=>x.classList.remove('good','bad'));b.classList.add(ok?'good':'bad');q.querySelector('.feedback').textContent=ok?'答对啦！你理解得很好。':'再想一想：先找出句子的主语和 be 动词，再选一次。'})));
 document.querySelectorAll('.reveal').forEach(b=>{if(b.id.startsWith('done'))return;b.addEventListener('click',()=>{let a=b.nextElementSibling;if(a&&a.classList.contains('answer')){a.classList.toggle('show');b.textContent=a.classList.contains('show')?'收起参考答案':'查看参考答案'}})});
 ['done3','done4'].forEach(id=>document.getElementById(id).addEventListener('click',()=>{document.getElementById(id==='done3'?'doneMsg3':'doneMsg4').textContent=' ✨ 已完成，记得再复习一次！'}));
+
+// 嵌入到左侧课程目录时，只显示所选课程笔记，不显示本页顶部介绍和课次切换。
+const embedLesson=new URLSearchParams(location.search).get('embed');
+if(embedLesson==='3'||embedLesson==='4'){
+ document.querySelector('.top')?.remove();
+ document.querySelector('.hero')?.remove();
+ document.querySelector('.tabs')?.remove();
+ document.querySelectorAll('.lesson').forEach(el=>el.classList.toggle('active',el.id==='l'+embedLesson));
+ document.body.style.background='transparent';
+ document.querySelector('.wrap').style.padding='0';
+}
 </script></body></html>
