@@ -43,6 +43,10 @@ main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:
     <button class="nav-btn" data-lesson="4"><span class="lesson-dot">04</span> 第4课 · Is this your…?</button>
     <button class="nav-btn" data-lesson="5"><span class="lesson-dot">05</span> 第5课 · Nice to meet you.</button>
     <button class="nav-btn" data-lesson="6"><span class="lesson-dot">06</span> 第6课 · What make is it?</button>
+    <button class="nav-btn" data-lesson="7"><span class="lesson-dot">07</span> 第7课 · Are you a teacher?</button>
+    <button class="nav-btn" data-lesson="8"><span class="lesson-dot">08</span> 第8课 · What&#39;s your job?</button>
+    <button class="nav-btn" data-lesson="9"><span class="lesson-dot">09</span> 第9课 · How are you today?</button>
+    <button class="nav-btn" data-lesson="10"><span class="lesson-dot">10</span> 第10课 · Look at…</button>
   </div>
   <div class="nav-label">学习小工具</div>
   <button class="nav-btn" onclick="document.getElementById('progress').scrollIntoView({behavior:'smooth'})">🌟 我的学习进度</button>
@@ -221,6 +225,10 @@ main{min-width:0}.topbar{display:flex;justify-content:space-between;align-items:
   <section class="lesson-panel" id="lesson4"><iframe class="lesson-embed" title="第4课笔记" src="lesson-3-4.html?embed=4" loading="lazy"></iframe></section>
   <section class="lesson-panel" id="lesson5"><iframe class="lesson-embed" title="第5课笔记" src="lesson-5-6.html?embed=5" loading="lazy"></iframe></section>
   <section class="lesson-panel" id="lesson6"><iframe class="lesson-embed" title="第6课笔记" src="lesson-5-6.html?embed=6" loading="lazy"></iframe></section>
+  <section class="lesson-panel" id="lesson7"><iframe class="lesson-embed" title="第7课笔记" src="lesson-7-10.html?embed=7" loading="lazy"></iframe></section>
+  <section class="lesson-panel" id="lesson8"><iframe class="lesson-embed" title="第8课笔记" src="lesson-7-10.html?embed=8" loading="lazy"></iframe></section>
+  <section class="lesson-panel" id="lesson9"><iframe class="lesson-embed" title="第9课笔记" src="lesson-7-10.html?embed=9" loading="lazy"></iframe></section>
+  <section class="lesson-panel" id="lesson10"><iframe class="lesson-embed" title="第10课笔记" src="lesson-7-10.html?embed=10" loading="lazy"></iframe></section>
   <div class="footer">Made with ☁️ and a little blue sky · 新概念英语第一册学习小站</div>
 </main>
 </div>
@@ -247,7 +255,7 @@ document.querySelectorAll('.nav-btn[data-lesson]').forEach(btn=>btn.addEventList
 document.querySelectorAll('.quiz-q').forEach(q=>q.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{let ok=btn.dataset.choice===q.dataset.answer;q.querySelectorAll('.option').forEach(o=>o.classList.remove('correct','wrong'));btn.classList.add(ok?'correct':'wrong');q.querySelector('.feedback').textContent=ok?'答对啦！很棒，继续保持。':'再想一想哦。先看清题目问的是哪种表达，再试一次。';})));
 function toggleAnswer(btn){btn.nextElementSibling.classList.toggle('show');btn.textContent=btn.nextElementSibling.classList.contains('show')?'收起参考表达':'查看参考表达';}
 function markLesson(n){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');if(!done.includes(n))done.push(n);localStorage.setItem('nc_done',JSON.stringify(done));updateProgress();document.getElementById('toast').classList.add('show');setTimeout(()=>document.getElementById('toast').classList.remove('show'),1800);}
-function updateProgress(){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');document.getElementById('progressFill').style.width=(done.length/6*100)+'%';document.getElementById('progressCount').textContent='完成 '+done.length+' / 6 课';}
+function updateProgress(){let done=JSON.parse(localStorage.getItem('nc_done')||'[]');document.getElementById('progressFill').style.width=(done.length/10*100)+'%';document.getElementById('progressCount').textContent='完成 '+done.length+' / 10 课';}
 function resetProgress(){if(confirm('确定要清除已完成的课程记录吗？')){localStorage.removeItem('nc_done');updateProgress();}}
 updateProgress();
 </script>
