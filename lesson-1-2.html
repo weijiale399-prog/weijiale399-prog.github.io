@@ -298,24 +298,70 @@ updateProgress();
 <span id="nc-speech-status">点单词可朗读</span>
 </div><script id="nc-speech-script">
 (function(){
- if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){const st=document.getElementById('nc-speech-status');if(st)st.textContent='此浏览器不支持朗读';return;}
- const status=document.getElementById('nc-speech-status'),rate=document.getElementById('nc-speak-rate');
+ const status=document.getElementById('nc-speech-status');
+ const rate=document.getElementById('nc-speak-rate');
+ if(!status||!rate)return;
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+  status.textContent='当前浏览器不支持网页朗读';return;
+ }
+ let activeUtterance=null;
+ function cleanEnglish(text){
+  return String(text||'')
+   .replace(/\/[ˈˌɑ-ɒa-zəɪʊːθðŋæʃʒɜːr\s]+\//gi,' ')
+   .replace(/\s+/g,' ').trim();
+ }
+ function chooseVoice(){
+  const voices=window.speechSynthesis.getVoices()||[];
+  return voices.find(v=>/^en-US/i.test(v.lang))
+   ||voices.find(v=>/^en-GB/i.test(v.lang))
+   ||voices.find(v=>/^en/i.test(v.lang))||null;
+ }
  function say(text){
-  text=(text||'').replace(/\/[ˈˌɑ-ɒa-zəɪʊːθðŋæʃʒɜːr\s]+\//gi,' ').replace(/\s+/g,' ').trim();
-  if(!text){status.textContent='没有识别到英文';return;}
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=Number(rate.value||0.9);
-  const voices=speechSynthesis.getVoices();const v=voices.find(x=>/^en-US/i.test(x.lang))||voices.find(x=>/^en-GB/i.test(x.lang))||voices.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;
-  u.onstart=()=>status.textContent='正在朗读…';u.onend=()=>status.textContent='朗读完成';u.onerror=()=>status.textContent='朗读失败，请重试';
-  speechSynthesis.speak(u);
+  text=cleanEnglish(text);
+  if(!text){status.textContent='没有识别到可朗读的英文';return;}
+  try{
+   window.speechSynthesis.cancel();
+   activeUtterance=null;
+   status.textContent='正在准备朗读…';
+   // Chrome 有时在 cancel() 后立即 speak 会中断新语音，稍作等待更稳定。
+   window.setTimeout(function(){
+    const u=new SpeechSynthesisUtterance(text);
+    activeUtterance=u;
+    u.lang='en-US';
+    u.rate=Number(rate.value||0.9);
+    const voice=chooseVoice();
+    if(voice)u.voice=voice;
+    u.onstart=()=>{status.textContent='正在朗读…';};
+    u.onend=()=>{status.textContent='朗读完成';activeUtterance=null;};
+    u.onerror=(event)=>{
+     const reason=event&&event.error?event.error:'unknown';
+     status.textContent='朗读未成功（'+reason+'）。请检查系统语音/浏览器设置后重试。';
+     activeUtterance=null;
+    };
+    try{window.speechSynthesis.resume();window.speechSynthesis.speak(u);}
+    catch(err){status.textContent='无法启动朗读：'+(err&&err.message?err.message:'浏览器语音服务不可用');}
+   },120);
+  }catch(err){
+   status.textContent='朗读启动失败，请检查浏览器是否支持英文语音';
+  }
  }
  document.getElementById('nc-speak-selection').addEventListener('click',()=>{
-  const sel=window.getSelection().toString().trim();
-  if(sel)say(sel);else status.textContent='请先用鼠标选中英文';
+  const selection=window.getSelection();
+  const selected=selection?selection.toString().trim():'';
+  if(selected)say(selected);
+  else status.textContent='请先用鼠标选中英文内容';
  });
- document.getElementById('nc-speak-pause').addEventListener('click',()=>{if(speechSynthesis.speaking)speechSynthesis.pause();status.textContent='已暂停';});
- document.getElementById('nc-speak-resume').addEventListener('click',()=>{speechSynthesis.resume();status.textContent='继续朗读';});
- document.getElementById('nc-speak-stop').addEventListener('click',()=>{speechSynthesis.cancel();status.textContent='已停止';});
+ document.getElementById('nc-speak-pause').addEventListener('click',()=>{
+  if(window.speechSynthesis.speaking){window.speechSynthesis.pause();status.textContent='已暂停';}
+  else status.textContent='当前没有正在朗读的内容';
+ });
+ document.getElementById('nc-speak-resume').addEventListener('click',()=>{
+  if(window.speechSynthesis.paused){window.speechSynthesis.resume();status.textContent='继续朗读';}
+  else status.textContent='当前没有暂停的朗读';
+ });
+ document.getElementById('nc-speak-stop').addEventListener('click',()=>{
+  window.speechSynthesis.cancel();activeUtterance=null;status.textContent='已停止';
+ });
  document.addEventListener('click',e=>{
   if(e.target.closest('#nc-speech-panel'))return;
   const word=e.target.closest('.word');
@@ -328,6 +374,7 @@ updateProgress();
    if(/[A-Za-z]/.test(raw))say(raw);
   }
  });
+ window.speechSynthesis.onvoiceschanged=()=>{ /* 让浏览器加载可用语音列表 */ };
 })();
 </script><style id="nc-personal-notes-style">
 #nc-notes-launch{position:fixed;right:22px;bottom:24px;z-index:99990;border:0;border-radius:999px;padding:13px 19px;background:linear-gradient(135deg,#42a9e8,#248bd0);color:#fff;font:700 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;box-shadow:0 8px 24px #238bd044;cursor:pointer}
