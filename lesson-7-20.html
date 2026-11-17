@@ -1,6 +1,14 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#dff3ff"><title>新概念英语第一册 第7—20课详细笔记</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f1f9ff;color:#263746;font:15px/1.8 -apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif}.wrap{max-width:1120px;margin:auto;padding:18px}.hero,.card{background:white;border:1px solid #e2f0f8;border-radius:22px;padding:22px;margin:14px 0;box-shadow:0 10px 28px #397eaa12}.hero{background:linear-gradient(120deg,#dff4ff,#f0fbff)}h1,h2,h3{color:#234b65;margin-top:0}h1{margin-bottom:4px}.muted{color:#68869a}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tab,button{cursor:pointer;border:1px solid #d7ebf7;background:white;border-radius:12px;padding:8px 12px;color:#367da5;font:inherit}.tab.active{background:#dff2ff;border-color:#9dd5f5}.lesson,.practice{display:none}.lesson.active,.practice.active{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mini,.pattern,.phrase,.wordcard,.quiz{background:#f6fbff;border:1px solid #e5f1f8;border-radius:14px;padding:12px;margin:9px 0}.mini b,.en{color:#247ead}.words{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.word{display:block;width:100%;text-align:left}.word small{color:#8aa0af;margin-left:6px}.detail{display:none;background:#eaf7ff;padding:12px;border-radius:12px;margin-top:10px}.detail.show{display:block}.formula{font-size:17px;font-weight:800;color:#167fb8}.label{font-size:11px;color:#247eae;background:#e0f3ff;padding:2px 7px;border-radius:20px}.call{padding:12px 15px;background:#eff9ff;border-left:4px solid #72c4f2;border-radius:12px;margin:12px 0}.yellow{background:#fff8e7;border-left-color:#e8c86c}.tip{background:#f1fbf6;border-left-color:#77c9a3}.example{padding:10px 12px;background:white;border:1px dashed #cfe6f4;border-radius:12px;margin:8px 0}.quiz{padding:14px}.opt{display:block;width:100%;text-align:left;margin:6px 0}.feedback{font-size:13px;color:#66869a;margin-top:6px}.good{background:#eafaf2;border-color:#7acba3}.bad{background:#fff1f2;border-color:#e9a3a9}.exercise-title{background:#e8f6ff;padding:10px 14px;border-radius:13px;margin-top:20px}.footer{text-align:center;color:#91a6b4;padding:18px}ul{padding-left:22px}@media(max-width:650px){.grid,.words{grid-template-columns:1fr}.wrap{padding:10px}.card,.hero{padding:15px}}
+</style><style id="speech-style">
+#nc-speech-panel{position:fixed;right:18px;bottom:18px;z-index:99999;display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #cfe9fa;border-radius:16px;padding:9px 11px;box-shadow:0 8px 28px #247eb52b;font:14px/1.4 -apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif}
+#nc-speech-panel button,#nc-speech-panel select{border:1px solid #cfe5f5;border-radius:10px;background:#f2f9ff;color:#246b9c;padding:7px 10px;cursor:pointer;font:inherit}
+#nc-speech-panel button.primary{background:#218bd0;color:white;border-color:#218bd0}
+#nc-speech-status{font-size:12px;color:#718596;min-width:72px}
+.word,.phrase,.example{cursor:pointer}
+.word:hover,.phrase:hover,.example:hover{outline:2px solid #8fd0fa;outline-offset:2px}
+@media(max-width:600px){#nc-speech-panel{left:10px;right:10px;bottom:10px;justify-content:center}#nc-speech-status{display:none}}
 </style></head><body><div class="wrap">
 <header class="hero"><div class="muted">☁️ 新概念英语第一册 · 天蓝小课堂</div><h1>第7—20课详细精讲笔记</h1><div class="muted">先理解句子，再学会自己说｜每课拆解词汇、短语、句型、语法和易错点</div><div class="call tip">学习建议：每课先读“句型拆解”，再读例句；把英文盖住，试着自己说中文对应的英文。练习统一放在最后的「练习专区」，不会打断每课笔记。</div></header>
 <nav class="tabs" id="tabs"></nav>
@@ -239,4 +247,44 @@ tabs.addEventListener("click",e=>{let b=e.target.closest(".tab");if(b){select(b.
 document.querySelectorAll(".quiz").forEach(q=>q.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{q.querySelectorAll(".opt").forEach(x=>x.classList.remove("good","bad"));let ok=b.dataset.v===q.dataset.a;b.classList.add(ok?"good":"bad");q.querySelector(".feedback").textContent=ok?"答对啦！做得好！":"正确答案："+q.dataset.a+"。再回到对应课次，看看这个句型为什么这样用。"})));
 const embed=new URLSearchParams(location.search).get("embed");
 if(embed){document.querySelector(".hero").remove();document.querySelector("#tabs").remove();if(embed==="practice"){document.querySelectorAll(".lesson").forEach(x=>x.classList.remove("active"));document.getElementById("practice").classList.add("active")}else{document.querySelectorAll(".lesson").forEach(x=>x.classList.toggle("active",x.id==="l"+embed));document.getElementById("practice").classList.remove("active")}document.querySelector(".wrap").style.padding="0";document.body.style.background="transparent"}
+</script><div id="nc-speech-panel" aria-label="英语朗读工具">
+<button class="primary" type="button" id="nc-speak-selection">🔊 朗读选中内容</button>
+<button type="button" id="nc-speak-pause">⏸ 暂停</button>
+<button type="button" id="nc-speak-resume">▶ 继续</button>
+<button type="button" id="nc-speak-stop">■ 停止</button>
+<select id="nc-speak-rate" aria-label="朗读语速"><option value="0.75">慢速</option><option value="0.9" selected>正常</option><option value="1.1">稍快</option></select>
+<span id="nc-speech-status">点单词可朗读</span>
+</div><script id="nc-speech-script">
+(function(){
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){const st=document.getElementById('nc-speech-status');if(st)st.textContent='此浏览器不支持朗读';return;}
+ const status=document.getElementById('nc-speech-status'),rate=document.getElementById('nc-speak-rate');
+ function say(text){
+  text=(text||'').replace(/\/[ˈˌɑ-ɒa-zəɪʊːθðŋæʃʒɜːr\s]+\//gi,' ').replace(/\s+/g,' ').trim();
+  if(!text){status.textContent='没有识别到英文';return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=Number(rate.value||0.9);
+  const voices=speechSynthesis.getVoices();const v=voices.find(x=>/^en-US/i.test(x.lang))||voices.find(x=>/^en-GB/i.test(x.lang))||voices.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;
+  u.onstart=()=>status.textContent='正在朗读…';u.onend=()=>status.textContent='朗读完成';u.onerror=()=>status.textContent='朗读失败，请重试';
+  speechSynthesis.speak(u);
+ }
+ document.getElementById('nc-speak-selection').addEventListener('click',()=>{
+  const sel=window.getSelection().toString().trim();
+  if(sel)say(sel);else status.textContent='请先用鼠标选中英文';
+ });
+ document.getElementById('nc-speak-pause').addEventListener('click',()=>{if(speechSynthesis.speaking)speechSynthesis.pause();status.textContent='已暂停';});
+ document.getElementById('nc-speak-resume').addEventListener('click',()=>{speechSynthesis.resume();status.textContent='继续朗读';});
+ document.getElementById('nc-speak-stop').addEventListener('click',()=>{speechSynthesis.cancel();status.textContent='已停止';});
+ document.addEventListener('click',e=>{
+  if(e.target.closest('#nc-speech-panel'))return;
+  const word=e.target.closest('.word');
+  if(word){const en=word.querySelector('.en');say(en?en.textContent:word.textContent);return;}
+  const phrase=e.target.closest('.phrase');
+  if(phrase){const b=phrase.querySelector('b,strong');say(b?b.textContent:phrase.textContent);return;}
+  const example=e.target.closest('.example');
+  if(example){
+   const raw=example.innerText.split('\n')[0].split('（')[0].split('(')[0];
+   if(/[A-Za-z]/.test(raw))say(raw);
+  }
+ });
+})();
 </script></body></html>
