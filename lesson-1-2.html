@@ -329,4 +329,63 @@ updateProgress();
   }
  });
 })();
-</script></body></html>
+</script><style id="nc-personal-notes-style">
+#nc-notes-launch{position:fixed;right:22px;bottom:24px;z-index:99990;border:0;border-radius:999px;padding:13px 19px;background:linear-gradient(135deg,#42a9e8,#248bd0);color:#fff;font:700 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;box-shadow:0 8px 24px #238bd044;cursor:pointer}
+#nc-notes-panel{position:fixed;right:20px;bottom:82px;z-index:99991;width:min(390px,calc(100vw - 28px));max-height:min(76vh,680px);display:none;flex-direction:column;background:#fff;border:1px solid #dcecf7;border-radius:20px;box-shadow:0 18px 55px #244b6630;overflow:hidden;color:#263746;font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+#nc-notes-panel.open{display:flex}
+#nc-notes-panel .n-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 16px;background:linear-gradient(120deg,#e1f4ff,#f2fbff);border-bottom:1px solid #e4f0f7}
+#nc-notes-panel .n-title{font-size:15px;font-weight:800;color:#24516e}
+#nc-notes-panel .n-sub{font-size:11px;color:#7793a5}
+#nc-notes-panel .n-close{border:0;background:#fff;border-radius:9px;padding:5px 10px;color:#52758a;cursor:pointer}
+#nc-notes-panel .n-body{padding:14px;overflow:auto}
+#nc-notes-panel .n-hint{font-size:12px;color:#71899a;margin:0 0 9px}
+#nc-notes-panel textarea{display:block;width:100%;min-height:230px;resize:vertical;border:1px solid #d9eaf5;border-radius:13px;padding:12px;background:#fbfdff;color:#263746;font:14px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;outline:none}
+#nc-notes-panel textarea:focus{border-color:#69b9e8;box-shadow:0 0 0 3px #dff3ff}
+#nc-notes-panel .n-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;border-top:1px solid #edf3f7;background:#fcfeff}
+#nc-notes-panel .n-status{font-size:11px;color:#6d8a9c}
+#nc-notes-panel .n-actions{display:flex;gap:7px}
+#nc-notes-panel .n-actions button{border:1px solid #d8eaf5;border-radius:9px;background:#fff;padding:7px 10px;color:#467b9a;font-size:12px;cursor:pointer}
+#nc-notes-panel .n-actions .n-export{background:#e8f6ff;border-color:#cce9fa;color:#287cad}
+@media(max-width:520px){#nc-notes-launch{right:14px;bottom:16px;padding:12px 15px}#nc-notes-panel{right:10px;bottom:72px;width:calc(100vw - 20px);max-height:78vh}}
+</style>
+<button id="nc-notes-launch" type="button" aria-controls="nc-notes-panel" aria-expanded="false">📝 我的课堂笔记</button>
+<section id="nc-notes-panel" aria-label="每课独立学习笔记">
+ <header class="n-head"><div><div class="n-title" id="nc-notes-title">📝 第1课 · 我的学习笔记</div><div class="n-sub">每课单独保存 · 自动保存</div></div><button class="n-close" id="nc-notes-close" type="button">收起</button></header>
+ <div class="n-body"><p class="n-hint">可以记录本课重点单词、语法疑问、错题、自己的例句。内容只保存在当前浏览器中。</p><textarea id="nc-notes-text" placeholder="例如：\n1. 今天学会了……\n2. 还不太明白……\n3. 自己造句：……"></textarea></div>
+ <footer class="n-foot"><span class="n-status" id="nc-notes-status" aria-live="polite">准备就绪</span><div class="n-actions"><button id="nc-notes-clear" type="button">清空本课</button><button class="n-export" id="nc-notes-export" type="button">导出本课</button></div></footer>
+</section>
+<script id="nc-personal-notes-script">
+(function(){
+ const launch=document.getElementById('nc-notes-launch'),panel=document.getElementById('nc-notes-panel'),field=document.getElementById('nc-notes-text'),title=document.getElementById('nc-notes-title'),status=document.getElementById('nc-notes-status');
+ if(!launch||!panel||!field||launch.dataset.ready)return;launch.dataset.ready='1';
+ let current=1,dirtyTimer=null;
+ const names={1:'Excuse me!',2:'Is this your…?',3:'Sorry, sir.',4:'Is this your…?',5:'Nice to meet you.',6:'What make is it?',7:'Are you a teacher?',8:"What's your job?",9:'How are you today?',10:'Look at…',11:'Is this your shirt?',12:'Whose is this?',13:'A new dress',14:'What colour is your…?',15:'Your passports, please.',16:'Are you…?',17:'How do you do?',18:'What are their jobs?',19:'Tired and thirsty',20:'Look at them!'};
+ function getLesson(){
+  const nav=document.querySelector('.nav-btn.active[data-lesson]');
+  if(nav && /^\d+$/.test(nav.dataset.lesson))return Number(nav.dataset.lesson);
+  const tab=document.querySelector('.tab.active,[role="tab"][aria-selected="true"]');
+  if(tab){const raw=(tab.dataset.target||tab.textContent||'').match(/(?:l|第)\s*(\d+)/i);if(raw)return Number(raw[1]);}
+  const visible=[...document.querySelectorAll('.lesson,section[id^="l"]')].find(el=>el.offsetParent!==null && !el.hidden && getComputedStyle(el).display!=='none');
+  if(visible){const m=(visible.id+' '+(visible.querySelector('h2')?.textContent||'')).match(/(?:l|第)\s*(\d+)/i);if(m)return Number(m[1]);}
+  const headings=[...document.querySelectorAll('h1,h2,h3')].filter(el=>el.offsetParent!==null);
+  for(const h of headings){const m=h.textContent.match(/第\s*(\d+)\s*课/);if(m)return Number(m[1]);}
+  const path=location.pathname;
+  const range=path.match(/lesson-(\d+)-(\d+)/);if(range)return Number(range[1]);
+  return 1;
+ }
+ function storageKey(n){return 'newconcept-personal-notes-lesson-'+n;}
+ function setStatus(s){status.textContent=s;}
+ function save(){try{localStorage.setItem(storageKey(current),field.value);setStatus('已自动保存 · '+new Date().toLocaleTimeString());}catch(e){setStatus('保存失败：浏览器存储不可用');}}
+ function load(){current=getLesson();title.textContent='📝 第'+current+'课 · '+(names[current]||'我的学习笔记');try{field.value=localStorage.getItem(storageKey(current))||'';setStatus(field.value?'已载入本课笔记':'本课还没有笔记');}catch(e){field.value='';setStatus('浏览器存储不可用');}}
+ function sync(){const n=getLesson();if(n!==current){save();load();}}
+ launch.addEventListener('click',()=>{sync();panel.classList.toggle('open');const open=panel.classList.contains('open');launch.setAttribute('aria-expanded',String(open));if(open)field.focus();});
+ document.getElementById('nc-notes-close').addEventListener('click',()=>{save();panel.classList.remove('open');launch.setAttribute('aria-expanded','false');});
+ field.addEventListener('input',()=>{setStatus('正在保存…');clearTimeout(dirtyTimer);dirtyTimer=setTimeout(save,250);});
+ document.getElementById('nc-notes-clear').addEventListener('click',()=>{if(!confirm('确定清空第'+current+'课的笔记吗？此操作无法撤销。'))return;field.value='';save();});
+ document.getElementById('nc-notes-export').addEventListener('click',()=>{save();const blob=new Blob(['第'+current+'课 '+(names[current]||'学习笔记')+'\n\n'+field.value],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='新概念英语第'+current+'课-我的笔记.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus('已导出本课笔记');});
+ document.addEventListener('click',e=>{if(e.target.closest('.nav-btn[data-lesson],.tab,[role="tab"]'))setTimeout(sync,80);});
+ const observer=new MutationObserver(()=>sync());observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','style','aria-selected']});
+ window.addEventListener('beforeunload',save);load();
+})();
+</script>
+</body></html>
