@@ -62,6 +62,34 @@ main{padding:34px clamp(22px,4vw,58px) 70px;max-width:1500px}
 @media(max-width:900px){.app{grid-template-columns:238px minmax(0,1fr)}main{padding:25px 22px 55px}}
 @media(max-width:680px){.app{display:block}.sidebar{padding:12px 14px}.brand{padding:3px 5px 10px}.navlabel,.sidefoot{display:none}.partlist{display:block;max-height:280px;overflow:auto}.sidebar nav{white-space:normal;overflow:visible}.sidebar .navbtn{display:inline-flex;width:auto}.sidebar nav .navbtn:nth-child(n+3){display:inline-flex}.side-part-head{font-size:12px}.side-lesson{font-size:11px;padding:7px}.hero{padding:23px 21px;border-radius:21px}.sectionhead h2{font-size:19px}.lesson-grid{gap:11px}}
 
+
+/* Course detail page redesign only */
+.detail{padding:clamp(18px,2.4vw,30px);border-radius:24px;border:1px solid #e5edf8;box-shadow:0 16px 42px rgba(48,87,145,.07);background:rgba(255,255,255,.98);margin-top:18px}
+.detailhead{align-items:center;padding-bottom:20px;gap:18px}
+.detail h2{font-size:clamp(23px,2.2vw,29px);letter-spacing:-.65px;line-height:1.25;margin:10px 0 7px;color:#1d2c45}
+.detailhead .tag{display:inline-flex;font-size:11px;padding:6px 11px;background:#edf4ff;color:#3978e8;font-weight:700}
+.detailhead .sub{font-size:13px;color:#8190a7}
+.detail-actions{gap:9px}
+.detail-actions button{font-size:13px;padding:10px 15px;border-radius:12px}
+.detailbody{grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:20px;margin-top:22px;align-items:start}
+.detailbody>div{min-width:0}
+.block{background:#f8faff;border:1px solid #e9eff8;border-radius:18px;padding:19px;margin-bottom:17px}
+.block h3{font-size:15px;line-height:1.45;margin:0 0 13px;color:#263954;font-weight:750;display:flex;align-items:center;gap:7px}
+.block p,.block li{font-size:14px;line-height:1.85;color:#62728c}
+.block ul{padding-left:21px;margin:8px 0}
+.example{background:#fff;border:1px solid #e7eef9;border-radius:13px;padding:14px 15px;margin:10px 0;transition:border-color .18s,box-shadow .18s}
+.example:hover{border-color:#d4e3fb;box-shadow:0 4px 13px rgba(58,102,165,.045)}
+.en{font-size:15px;line-height:1.55;color:#245cae;font-weight:700}
+.zh{font-size:13px;line-height:1.7;color:#667791;margin-top:5px}
+.grammar{font-size:12px;line-height:1.7;color:#8796ad;margin-top:7px;padding-top:7px;border-top:1px solid #f0f3f8}
+.wordplay{font-size:inherit;line-height:inherit}
+.block>p:first-of-type{margin-top:0}
+.callout{background:linear-gradient(135deg,#fff9ec,#fffdf7);border:1px solid #f4e9d0;border-radius:15px;padding:16px;font-size:13px;line-height:1.85;color:#806b43}
+.block .secondary{font-size:12px;padding:8px 12px;border-radius:10px;margin-top:8px}
+#detailCard{max-width:1180px;margin:0 auto}
+@media(max-width:1000px){.detailbody{grid-template-columns:minmax(0,1fr);gap:0}.detailbody>div{width:100%}.detailbody>div:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:start}.detailbody>div:last-child>.block{margin:0}.detailbody>div:last-child>.callout{grid-column:1/-1}}
+@media(max-width:620px){.detail{padding:16px;border-radius:18px}.detailhead{align-items:flex-start;flex-direction:column}.detail-actions{width:100%}.detail-actions button{flex:1}.block{padding:15px;border-radius:15px;margin-bottom:12px}.block h3{font-size:14px}.block p,.block li{font-size:13px}.example{padding:12px;margin:8px 0}.en{font-size:14px}.zh{font-size:12px}.detailbody>div:last-child{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
