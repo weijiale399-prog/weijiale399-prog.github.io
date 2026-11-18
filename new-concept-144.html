@@ -118,6 +118,14 @@ main{padding:34px clamp(22px,4vw,58px) 70px;max-width:1500px}
 .detail-actions button{border-radius:9px;padding:8px 12px;font-size:12px}
 @media(max-width:650px){.detail{padding:13px;border-radius:15px}.detailhead{align-items:flex-start;flex-direction:column}.detail-actions{width:100%}.detail-actions button{flex:1}.lesson-tabs{gap:5px;padding:8px}.lesson-tabs a{font-size:10px;padding:6px 8px}.detailbody.lesson-stack .block{padding:13px;margin-bottom:10px}}
 
+
+/* Full curriculum learning system, based on the supplied Gemini reference */
+.overview-table-card{padding:22px;margin-top:12px}.overview-table-card h3{font-size:15px;margin:2px 0 12px;color:#263b59}.overview-table-card h3:not(:first-child){margin-top:24px}
+.table-scroll{overflow-x:auto;margin-bottom:14px}.map-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;min-width:640px}.map-table th{background:#f1f5fa;color:#5e708a;text-align:left;font-weight:700;padding:11px 12px}.map-table td{padding:11px 12px;border-bottom:1px solid #edf1f6;color:#63748d;line-height:1.65}.map-table td:first-child{font-weight:700;color:#356ec1;white-space:nowrap}.map-table tr:last-child td{border-bottom:0}
+.course-part-section{margin:24px 0 32px}.course-part-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:#17243b;color:#fff;border-radius:14px;margin-bottom:13px}.course-part-banner small{font-size:10px;letter-spacing:1.3px;color:#a9c5f4}.course-part-banner h2{font-size:19px;margin:4px 0}.course-part-banner p{font-size:12px;color:#c4d0e2;margin:0;line-height:1.7}.course-part-banner>span{font-size:11px;color:#cbd8eb;white-space:nowrap}
+.course-card-list{display:flex;flex-direction:column;gap:13px}.course-lesson-card{background:#fff;border:1px solid #e2eaf4;border-left:3px solid #5b63ed;border-radius:13px;padding:15px 17px;box-shadow:0 3px 12px rgba(35,65,105,.035);scroll-margin-top:18px}.course-lesson-card:nth-child(even){border-left-color:#0c9b8b}.course-lesson-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:11px;border-bottom:1px solid #edf1f6}.course-lesson-title{display:flex;align-items:center;gap:10px;min-width:0}.lesson-number{display:inline-grid;place-items:center;min-width:32px;height:28px;border-radius:7px;background:#f0f4fa;color:#4b668d;font-size:11px;font-weight:800}.course-lesson-title h3{font-size:15px;margin:0;color:#1e304c}.course-lesson-title h3 small{font-size:12px;color:#71829b;font-weight:400}.course-lesson-title p{font-size:10px;color:#8b9ab0;margin:4px 0 0}.course-card-actions{display:flex;gap:7px;flex:none}.course-card-actions button{font-size:10px;padding:7px 10px;border-radius:8px}.course-lesson-summary,.course-lesson-focus{display:flex;gap:14px;padding:10px 2px 2px;font-size:12px;line-height:1.75}.course-lesson-summary b,.course-lesson-focus b{white-space:nowrap;color:#405773}.course-lesson-summary span,.course-lesson-focus span{color:#71829a}.course-lesson-content{border-top:1px dashed #e4eaf2;margin-top:12px;padding-top:14px}.course-content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.course-content-grid section{background:#f7f9fc;border:1px solid #e9eef5;border-radius:10px;padding:12px}.course-content-grid h4{font-size:12px;color:#334a69;margin:0 0 9px}.course-example{padding:8px 9px;background:#fff;border:1px solid #e7edf5;border-radius:8px;margin:6px 0;display:flex;flex-direction:column;gap:3px}.course-example b{font-size:12px;color:#285b9f}.course-example span{font-size:11px;color:#6f8199}.course-example small{font-size:10px;color:#8494aa;line-height:1.6}.course-word-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.course-word{display:flex;flex-direction:column;gap:3px;padding:7px 8px;background:#fff;border:1px solid #e7edf5;border-radius:8px}.course-word b{font-size:11px;color:#285b9f}.course-word span,.course-word small{font-size:10px;color:#7c8ca3;line-height:1.5}.course-content-grid ul{padding-left:18px;margin:0;color:#7b6c4c;font-size:11px;line-height:1.8}.course-pending{background:#fff9ed;border:1px solid #f1e5c9;border-radius:9px;padding:12px;color:#806c48;font-size:11px;line-height:1.8}.course-lesson-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;padding-top:9px;border-top:1px solid #f0f3f7;color:#8998ad;font-size:10px}.text-link{border:0;background:transparent;color:#4778c9;font-size:10px;padding:3px}
+@media(max-width:720px){.overview-table-card{padding:14px}.course-part-banner{align-items:flex-start;flex-direction:column;gap:7px;padding:15px}.course-lesson-card{padding:12px}.course-lesson-head{align-items:flex-start;flex-direction:column}.course-card-actions{width:100%}.course-card-actions button{flex:1}.course-lesson-summary,.course-lesson-focus{display:block}.course-lesson-summary b,.course-lesson-focus b{display:block;margin-bottom:3px}.course-content-grid{grid-template-columns:1fr}.course-word-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.course-lesson-foot{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -143,6 +151,30 @@ main{padding:34px clamp(22px,4vw,58px) 70px;max-width:1500px}
  <section id="overviewView">
   <div class="sectionhead"><div><h2>七大学习阶段</h2><p>先看全册路线，再进入每一课学习</p></div></div>
   <div class="partgrid" id="partCards"></div>
+  <div class="sectionhead"><div><h2>全册学习地图</h2><p>先了解每个阶段学什么，再按课次推进</p></div></div>
+  <div class="detail overview-table-card">
+   <h3>📚 课程阶段与学习重点</h3>
+   <div class="table-scroll"><table class="map-table"><thead><tr><th>阶段</th><th>课次</th><th>核心内容</th><th>学习目标</th></tr></thead><tbody>
+   <tr><td>Part 1</td><td>L1–14</td><td>问候、be 动词、代词、冠词、特殊疑问句</td><td>能介绍自己、询问身份和物品</td></tr>
+   <tr><td>Part 2</td><td>L15–28</td><td>名词复数、宾格、some / any、There be</td><td>能描述物品数量和位置</td></tr>
+   <tr><td>Part 3</td><td>L29–44</td><td>祈使句、must、现在进行时、be going to</td><td>能描述正在发生和计划做的事</td></tr>
+   <tr><td>Part 4</td><td>L45–64</td><td>can、一般现在时、do / does、频度表达</td><td>能谈日常习惯、能力和喜好</td></tr>
+   <tr><td>Part 5</td><td>L65–90</td><td>一般过去时、现在完成时</td><td>能讲过去发生的事和经历</td></tr>
+   <tr><td>Part 6</td><td>L91–116</td><td>will、宾语从句、不定式、比较结构</td><td>能表达将来、想法和比较</td></tr>
+   <tr><td>Part 7</td><td>L117–144</td><td>过去进行时、定语从句、间接引语、被动语态</td><td>能理解更长的句子和复合表达</td></tr>
+   </tbody></table></div>
+   <h3>🧭 核心语法路线</h3>
+   <div class="table-scroll"><table class="map-table"><thead><tr><th>语法主题</th><th>对应课次</th><th>基本结构</th><th>例句</th></tr></thead><tbody>
+   <tr><td>be 动词</td><td>L1 起</td><td>主语 + am / is / are</td><td>I am a student.</td></tr>
+   <tr><td>名词复数</td><td>L15 起</td><td>名词 + -s / -es（常见规则）</td><td>These are my books.</td></tr>
+   <tr><td>现在进行时</td><td>L31</td><td>am / is / are + doing</td><td>She is reading.</td></tr>
+   <tr><td>be going to</td><td>L37</td><td>am / is / are + going to + 动词原形</td><td>I'm going to make a bookcase.</td></tr>
+   <tr><td>一般现在时</td><td>L47 起</td><td>动词原形 / 第三人称单数</td><td>He likes coffee.</td></tr>
+   <tr><td>一般过去时</td><td>L67 起</td><td>was / were；动词过去式</td><td>We were at home.</td></tr>
+   <tr><td>现在完成时</td><td>L83 起</td><td>have / has + 过去分词</td><td>I've just had lunch.</td></tr>
+   <tr><td>被动语态</td><td>L143–144</td><td>be + 过去分词</td><td>He hasn't been served yet.</td></tr>
+   </tbody></table></div>
+  </div>
   <div class="sectionhead"><div><h2>从这里开始</h2><p>精选前四课作为页面交互与讲解示范</p></div><button class="ghost" onclick="showView('lessons')">查看全部课程 →</button></div>
   <div class="lesson-grid" id="featured"></div>
  </section>
@@ -204,9 +236,26 @@ function renderParts(){
 function lessonButton(l){return `<button class="lesson ${done.has(l.n)?"done":""}" onclick="openLesson(${l.n})"><span class="check">${done.has(l.n)?"✓":""}</span><small>LESSON ${l.n}</small><b>${l.title}</b><em>${l.cn||"课程语法与句型"}</em></button>`}
 function renderLessons(){
  let filtered=lessons.filter(l=>(!activePart||l.part===activePart)&&(!showOnlyDone||done.has(l.n))&&(`${l.n} ${l.title} ${l.cn} ${topics[l.n]?.topic||""}`).toLowerCase().includes(query.toLowerCase()));
- let groups=parts.filter(p=>!activePart||p.n===activePart).map(p=>{let arr=filtered.filter(l=>l.part===p.n);return arr.length?`<div class="sectionhead"><div><h2>Part ${p.n} · ${p.name}</h2><p>${p.range}　·　${arr.length} 课</p></div></div><div class="lesson-grid">${arr.map(lessonButton).join("")}</div>`:""}).join("");
+ let groups=parts.filter(p=>!activePart||p.n===activePart).map(p=>{
+  let arr=filtered.filter(l=>l.part===p.n);
+  if(!arr.length)return "";
+  return `<section class="course-part-section"><header class="course-part-banner"><div><small>COURSE PART ${p.n}</small><h2>Part ${p.n} · ${p.name}</h2><p>${p.desc}</p></div><span>${p.range} · ${arr.length} 课</span></header><div class="course-card-list">${arr.map(l=>{
+   const d=detailedLessons[l.n],t=topics[l.n]||{};
+   const status=d?"内容精讲":t.topic?"语法提纲":"课程目录";
+   const intro=d?.goal||t.explain||"本课将围绕课文主题学习重点词汇、句型和语法。详细讲解将按教材内容逐课补充。";
+   const focus=d?.grammar?.map(x=>x[0]).join(" · ")||t.topic||"本课重点待补充";
+   const sentenceRows=d?.sentences?.slice(0,4).map(x=>`<div class="course-example"><b>${x[0]}</b><span>${x[1]}</span><small>${x[2]}</small></div>`).join("")|| (t.examples||[]).map(x=>`<div class="course-example"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+   const wordRows=d?.words?.slice(0,8).map(x=>`<div class="course-word"><b>${x[0]}</b><span>${x[1]} · ${x[2]}</span><small>${x[3]}</small></div>`).join("");
+   const phraseRows=d?.phrases?.slice(0,6).map(x=>`<div class="course-example"><b>${x[0]}</b><span>${x[1]}</span><small>例句：${x[2]}</small></div>`).join("");
+   return `<article class="course-lesson-card" id="course-L${l.n}"><div class="course-lesson-head"><div class="course-lesson-title"><span class="lesson-number">L${l.n}</span><div><h3>${l.title} <small>${l.cn}</small></h3><p>Unit ${Math.ceil(l.n/2)} · ${status} · ${d?"重点词汇 "+d.words.length+" 个":"学习提纲"}</p></div></div><div class="course-card-actions"><button class="secondary" onclick="openLesson(${l.n})">进入精讲 ↗</button><button class="primary" onclick="toggleCourseCard(${l.n},this)">展开内容</button></div></div><div class="course-lesson-summary"><b>本课学习目标</b><span>${intro}</span></div><div class="course-lesson-focus"><b>语法 / 句型重点</b><span>${focus}</span></div><div class="course-lesson-content" id="course-content-${l.n}" hidden>
+    ${d? `<div class="course-content-grid"><section><h4>💬 重点句子</h4>${sentenceRows||"本课重点句子待补充"}</section><section><h4>🔤 重点单词</h4><div class="course-word-grid">${wordRows||"本课词汇待补充"}</div></section><section><h4>🧩 重点短语</h4>${phraseRows||"本课短语待补充"}</section><section><h4>⚠️ 易错提醒</h4><ul>${d.mistakes.map(x=>`<li>${x}</li>`).join("")}</ul></section></div>`:`<div class="course-pending">本课的完整课文、词汇、短语、句型和练习需要依据你使用的教材版本逐课核对补充。目前页面先保留课程位置与已整理的语法提纲，不用猜测内容填充。</div>`}
+   </div><div class="course-lesson-foot"><span>${done.has(l.n)?"✓ 已标记学习":"建议：先读句子，再学语法，最后做练习"}</span><button class="text-link" onclick="openLesson(${l.n})">打开本课完整学习卡 →</button></div></article>`;
+  }).join("")}</div></section>`;
+ }).join("");
  $("#lessonGroups").innerHTML=groups||`<div class="empty">没有找到符合条件的课程</div>`;
 }
+function toggleCourseCard(n,btn){const panel=$("#course-content-"+n);const opening=panel.hidden;panel.hidden=!opening;btn.textContent=opening?"收起内容":"展开内容"}
+
 function filterPart(n){activePart=n;showView("lessons");$$(".chip[data-part]").forEach(b=>b.classList.toggle("active",+b.dataset.part===n))}
 function openLesson(n){
  let l=lessons[n-1],t=topics[n]||{topic:"本课语法主题",type:"课程学习",pattern:"请结合本课内容学习。",examples:[],explain:"本课详细内容后续逐课补充。",mistake:"学习时注意结合语境。"};
