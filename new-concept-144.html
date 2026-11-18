@@ -90,6 +90,34 @@ main{padding:34px clamp(22px,4vw,58px) 70px;max-width:1500px}
 @media(max-width:1000px){.detailbody{grid-template-columns:minmax(0,1fr);gap:0}.detailbody>div{width:100%}.detailbody>div:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:start}.detailbody>div:last-child>.block{margin:0}.detailbody>div:last-child>.callout{grid-column:1/-1}}
 @media(max-width:620px){.detail{padding:16px;border-radius:18px}.detailhead{align-items:flex-start;flex-direction:column}.detail-actions{width:100%}.detail-actions button{flex:1}.block{padding:15px;border-radius:15px;margin-bottom:12px}.block h3{font-size:14px}.block p,.block li{font-size:13px}.example{padding:12px;margin:8px 0}.en{font-size:14px}.zh{font-size:12px}.detailbody>div:last-child{grid-template-columns:1fr}}
 
+
+/* Match the supplied lesson-page reference: one readable vertical course flow */
+#detailCard{max-width:100%;margin:0 auto}
+.detail{padding:clamp(16px,2vw,26px);border-radius:20px;background:#fff;border:1px solid #e3ebf5;box-shadow:0 5px 18px rgba(35,65,105,.045);border-left:4px solid #6258f5}
+.detailhead{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #e8edf5;padding:0 0 16px;margin-bottom:16px}
+.detailhead h2{font-size:clamp(21px,2vw,27px);margin:8px 0 4px;line-height:1.35;color:#182b48}
+.detailhead h2 small{font-size:14px;color:#71829c;font-weight:500}
+.detailhead .tag{font-size:11px;border-radius:7px;padding:5px 9px;background:#eef3ff;color:#4c68b8}
+.detailhead .sub{font-size:12px;color:#8190a7}
+.detailbody.lesson-stack{display:block;margin-top:14px}
+.detailbody.lesson-stack>div{display:contents}
+.detailbody.lesson-stack .block{display:block;background:#f8fafc;border:1px solid #e3eaf3;border-radius:13px;padding:16px 17px;margin:0 0 12px;box-shadow:none}
+.detailbody.lesson-stack .block h3{font-size:15px;margin:0 0 11px;color:#263b59}
+.detailbody.lesson-stack .block p,.detailbody.lesson-stack .block li{font-size:13px;line-height:1.8;color:#687b95}
+.detailbody.lesson-stack .example{background:#fff;border:1px solid #e0e8f2;border-radius:10px;padding:11px 13px;margin:8px 0}
+.detailbody.lesson-stack .en{font-size:14px;line-height:1.6;color:#1d3b62}
+.detailbody.lesson-stack .zh{font-size:12px;line-height:1.7;color:#74869e}
+.detailbody.lesson-stack .grammar{font-size:11px;line-height:1.7;color:#4777bd;background:#f0f6ff;border:1px solid #dceaff;border-radius:7px;padding:5px 8px;margin-top:7px}
+.detailbody.lesson-stack .callout{margin-top:2px;border-radius:10px;padding:11px 14px;font-size:12px}
+.lesson-tabs{display:flex;flex-wrap:wrap;gap:7px;padding:10px;background:#f1f5fa;border:1px solid #e4ebf4;border-radius:12px;margin:14px 0 16px}
+.lesson-tabs a{font-size:11px;font-weight:650;color:#536987;text-decoration:none;background:#fff;border:1px solid #e0e8f2;border-radius:8px;padding:7px 10px}
+.lesson-tabs a:hover{color:#386fe0;border-color:#c9d9f6;background:#f8fbff}
+.detailbody.lesson-stack .block{scroll-margin-top:20px}
+.detailbody.lesson-stack .block:has(h3:first-child){min-width:0}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap}
+.detail-actions button{border-radius:9px;padding:8px 12px;font-size:12px}
+@media(max-width:650px){.detail{padding:13px;border-radius:15px}.detailhead{align-items:flex-start;flex-direction:column}.detail-actions{width:100%}.detail-actions button{flex:1}.lesson-tabs{gap:5px;padding:8px}.lesson-tabs a{font-size:10px;padding:6px 8px}.detailbody.lesson-stack .block{padding:13px;margin-bottom:10px}}
+
 </style>
 </head>
 <body>
@@ -194,6 +222,17 @@ function openLesson(n){
  <div class="block"><h3>📌 本课复习清单</h3><ul><li>能看懂并读出本课重点单词。</li><li>能不看提示说出重点短语。</li><li>能理解每个重点句子的结构。</li><li>能独立完成小测，并把错题再说一遍。</li></ul></div>`:`<div class="block"><h3>⚠️ 容易出错的地方</h3><p>${t.mistake}</p></div>`;
  let oldExamples=t.examples?.length?`<div class="block"><h3>📖 补充例句</h3>${list(t.examples,e=>`<div class="example"><div class="en">${e[0]}</div><div class="zh">${e[1]}</div><div class="grammar">语法句型：结合本课重点结构进行替换练习。</div></div>`)}</div>`:"";
  $("#detailCard").innerHTML=`<div class="detailhead"><div><span class="tag">PART ${l.part} · ${t.type}</span><h2>L${n} · ${l.title}</h2><div class="sub">${l.cn}　·　Unit ${Math.ceil(n/2)}</div></div><div class="detail-actions"><button class="secondary" onclick="speakLesson(${n})">🔊 朗读标题</button><button class="primary" id="markBtn" onclick="toggleDone(${n})">${done.has(n)?"✓ 已学完成":"标记为已学"}</button></div></div><div class="detailbody"><div>${expanded}${oldExamples}</div><div>${right}<div class="callout">学习建议：先学重点单词，再读短语和句子；每个句子都要理解中文意思，并留意“语法句型”说明。内容采用原创例句辅助理解，不替代课本原文。</div></div></div>`;
+ const detailBody=$("#detailCard .detailbody");
+ if(detailBody){
+   const columns=[...detailBody.children];
+   const blocks=columns.flatMap(col=>[...col.children]);
+   const labels=["本课学习目标","本课重点语法","重点单词","重点短语","重点句子与句型分析","常见错误与提醒","课后小测","本课复习清单","补充例句"];
+   blocks.forEach((el,i)=>{const h=el.querySelector("h3");if(h){const label=labels.find(x=>h.textContent.includes(x))||h.textContent.replace(/^[^\u4e00-\u9fa5A-Za-z]+/,"");el.id="lesson-section-"+i;el.dataset.lessonLabel=label;}});
+   const nav= document.createElement("nav");nav.className="lesson-tabs";
+   blocks.filter(el=>el.dataset.lessonLabel).forEach(el=>{const a=document.createElement("a");a.href="#"+el.id;a.textContent=el.dataset.lessonLabel;nav.appendChild(a);});
+   detailBody.parentNode.insertBefore(nav,detailBody);
+   detailBody.classList.add("lesson-stack");
+ }
  showView("detail");
 }
 function speakText(text){if("speechSynthesis" in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="en-US";speechSynthesis.speak(u)}}
